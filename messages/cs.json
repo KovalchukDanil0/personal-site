@@ -1,0 +1,10 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"hello_world": "Hello, {name} from cs!",
+	"navigation": {
+		"title": "Danylův prostor"
+	},
+	"error": {
+		"unknown": "Došlo k neznámé chybě"
+	}
+}

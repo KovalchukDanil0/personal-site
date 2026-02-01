@@ -1,0 +1,25 @@
+html,
+body,
+main {
+	background-color: var(--bg);
+	color: var(--text);
+	height: 100%;
+	width: 100%;
+	overflow-x: hidden;
+}
+
+body {
+	padding: 1rem;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+
+	@media screen and (width >= 900px) {
+		flex-direction: row;
+	}
+}
+
+summary {
+	cursor: pointer;
+}
