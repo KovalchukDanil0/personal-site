@@ -1,6 +1,5 @@
 <script>
-	import { resolve } from "$app/paths";
-	import { Button, Link } from "$lib/components";
+	import { Button } from "$lib/components";
 </script>
 
 <svelte:head>
@@ -18,6 +17,3 @@
 	}}
 	>Test
 </Button>
-
-<Link href={resolve("/blog")}>Blog</Link>
-<Link href={resolve("/resume")}>Resume</Link>

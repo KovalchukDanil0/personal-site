@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getLocale, locales, setLocale, type Locale } from "$lib/paraglide/runtime";
 	import type { HTMLSelectAttributes } from "svelte/elements";
+	import { Option, Select } from "..";
 
 	let props: HTMLSelectAttributes = $props();
 
@@ -12,7 +13,7 @@
 	const currentLocale = getLocale();
 </script>
 
-<select
+<Select
 	{...props}
 	name="locale"
 	onchange={async ({ currentTarget: { value } }) => {
@@ -24,6 +25,6 @@
 	}}
 >
 	{#each locales as locale (locale)}
-		<option value={locale} selected={locale === currentLocale}>{localeNames[locale]}</option>
+		<Option value={locale} selected={locale === currentLocale}>{localeNames[locale]}</Option>
 	{/each}
-</select>
+</Select>

@@ -1,7 +1,7 @@
 ---
 title: How to goat
 description: How to goat description
-date: 30-01-2026
+date: 2026-01-30
 ---
 
 This is **markdown** rendered by SvelteKit 🚀

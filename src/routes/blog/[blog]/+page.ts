@@ -1,18 +1,21 @@
+import { m } from "$lib/paraglide/messages";
 import { error } from "@sveltejs/kit";
 import type { Component } from "svelte";
 
+interface BlogType {
+	default: Component;
+	metadata: BlogMetadataType;
+}
+
 export async function load({ params: { blog } }) {
 	try {
-		const post: { default: Component; metadata: BlogMetadataType } = await import(
-			`$lib/posts/${blog}.md`
-		);
-		const content = post.default;
+		const { default: content, metadata }: BlogType = await import(`$lib/posts/${blog}.md`);
 
 		return {
 			content,
-			...post.metadata,
+			...metadata,
 		};
 	} catch {
-		error(404, `Blog "${blog}" not found`);
+		error(404, m["error.blogNotFound"]({ blog }));
 	}
 }

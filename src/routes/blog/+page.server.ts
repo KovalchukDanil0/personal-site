@@ -1,9 +1,9 @@
-interface BlogType {
+interface BlogGlobType {
 	metadata: BlogMetadataType;
 }
 
 export async function load() {
-	const postsGlob = import.meta.glob<true, string, BlogType>("$lib/posts/*.md", {
+	const postsGlob = import.meta.glob<true, string, BlogGlobType>("$lib/posts/*.md", {
 		eager: true,
 	});
 
@@ -12,7 +12,7 @@ export async function load() {
 			blog: path.split("/").pop()?.replace(".md", ""),
 			metadata: module.metadata,
 		}))
-		.filter((post): post is { blog: string; metadata: BlogMetadataType } => !!post.blog);
+		.filter((post): post is { blog: string } & BlogGlobType => !!post.blog);
 
 	return {
 		posts,

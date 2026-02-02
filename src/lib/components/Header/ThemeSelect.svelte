@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { setThemeCookie, themes, type Theme } from "$lib/themes";
 	import type { HTMLSelectAttributes } from "svelte/elements";
+	import { Option, Select } from "..";
 
 	interface Props extends HTMLSelectAttributes {
 		theme: Theme;
@@ -9,7 +10,7 @@
 	let { theme, ...restProps }: Props = $props();
 </script>
 
-<select
+<Select
 	{...restProps}
 	bind:value={theme}
 	onchange={({ currentTarget: { value } }) => {
@@ -23,6 +24,6 @@
 	}}
 >
 	{#each themes as theme (theme)}
-		<option value={theme}>{theme}</option>
+		<Option value={theme}>{theme}</Option>
 	{/each}
-</select>
+</Select>

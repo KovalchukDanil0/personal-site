@@ -20,10 +20,17 @@ export default defineConfig({
 			strategy: ["cookie", "preferredLanguage", "url", "baseLocale"],
 			urlPatterns: [
 				{
-					pattern: "/blog", // Canonical route
+					pattern: "/blog",
 					localized: [
-						["en", "/blog"], // English: /about
-						["cs", "/blogu"], // German: /ueber-uns
+						["en", "/blog"],
+						["cs", "/blogu"],
+					],
+				},
+				{
+					pattern: "/resume",
+					localized: [
+						["en", "/resume"],
+						["cs", "/životopis"],
 					],
 				},
 			],

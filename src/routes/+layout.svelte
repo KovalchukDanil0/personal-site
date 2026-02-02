@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from "$app/state";
 	import favicon from "$lib/assets/favicon.svg";
-	import { Link, NavBar } from "$lib/components";
+	import { Header, Link } from "$lib/components";
 	import "$lib/styles/main.scss";
 	import { parentRoute } from "$lib/utils";
 
@@ -15,7 +15,7 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<NavBar {theme} />
+<Header {theme} />
 
 <main>
 	{#if parentUrl}
