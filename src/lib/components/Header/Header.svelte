@@ -32,18 +32,23 @@
 {/snippet}
 
 <header {...restProps}>
-	<Link href={resolve("/")} variant="text">{m["navigation.title"]()}</Link>
+	<div class="header-content">
+		<Link href={resolve("/")} variant="text">{m["navigation.title"]()}</Link>
 
-	{@render toggles()}
-	{@render navigation()}
+		{@render toggles()}
+		{@render navigation()}
 
-	<Button
-		onclick={() => {
-			hamburgerMenuOpened = !hamburgerMenuOpened;
-		}}>Open Nav Menu</Button
-	>
+		<Button
+			onclick={() => {
+				hamburgerMenuOpened = !hamburgerMenuOpened;
+			}}>Open Nav Menu</Button
+		>
+	</div>
+
 	{#if hamburgerMenuOpened}
-		<p>Hamburger with Cheese please</p>
+		<div class="hamburger-menu">
+			<p>Hamburger with Cheese please</p>
+		</div>
 	{/if}
 </header>
 
@@ -56,6 +61,11 @@
 
 <style lang="scss">
 	header {
+		display: flex;
+		flex-direction: column;
+	}
+
+	div.header-content {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -95,5 +105,8 @@
 		@media screen and (width >= 900px) {
 			flex-direction: column;
 		}
+	}
+
+	div.hamburger-menu {
 	}
 </style>

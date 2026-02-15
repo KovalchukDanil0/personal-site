@@ -1,5 +1,30 @@
+export interface BlogMetadataType {
+	title: string;
+	description: string;
+	date: Date;
+}
+
 interface BlogGlobType {
 	metadata: BlogMetadataType;
+}
+
+export type BlogItem = { blog: string } & BlogGlobType;
+
+function postsByYear(posts: BlogItem[]): Record<string, BlogItem[]> {
+	return posts.reduce(
+		(acc, blog) => {
+			const year = blog.metadata.date.getFullYear().toString();
+
+			if (!acc[year]) {
+				acc[year] = [];
+			}
+
+			acc[year].push(blog);
+
+			return acc;
+		},
+		{} as Record<string, BlogItem[]>
+	);
 }
 
 export async function load() {
@@ -8,13 +33,13 @@ export async function load() {
 	});
 
 	const posts = Object.entries(postsGlob)
-		.map(([path, module]) => ({
+		.map(([path, { metadata }]) => ({
 			blog: path.split("/").pop()?.replace(".md", ""),
-			metadata: module.metadata,
+			metadata: { ...metadata, date: new Date(metadata.date) },
 		}))
-		.filter((post): post is { blog: string } & BlogGlobType => !!post.blog);
+		.filter((post): post is BlogItem => !!post.blog);
 
 	return {
-		posts,
+		postsWithYear: postsByYear(posts),
 	};
 }

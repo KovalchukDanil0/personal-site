@@ -1,5 +1,6 @@
 <script>
 	import { Button } from "$lib/components";
+	import { Anvil } from "@lucide/svelte";
 </script>
 
 <svelte:head>
@@ -9,6 +10,8 @@
 
 <h1>HomePage</h1>
 <p>Home Page</p>
+
+<Anvil />
 
 <Button
 	onclick={async () => {

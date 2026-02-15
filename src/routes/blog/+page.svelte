@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 	import { resolve } from "$app/paths";
 	import { Link } from "$lib/components";
 
 	let { data } = $props();
-	const { posts } = $derived(data);
+	const { postsWithYear, currentYear } = $derived(data);
 </script>
 
 <svelte:head>
@@ -11,16 +11,31 @@
 	<meta property="description" content="Blog overview description" />
 </svelte:head>
 
-<div class="posts">
-	{#each posts as { metadata: { title, date }, blog } (blog)}
-		<Link href={resolve("/blog/[blog]", { blog })}>{title} {date}</Link>
+<div class="posts-overview">
+	{#each Object.entries(postsWithYear) as [year, posts] (year)}
+		<details open>
+			<summary>
+				{year}
+			</summary>
+			<div class="posts">
+				{#each posts as { blog, metadata: { title, date } }}
+					<Link href={resolve("/blog/[blog]", { blog })}>{title} {date}</Link>
+				{/each}
+			</div>
+		</details>
 	{/each}
 </div>
 
 <style lang="scss">
-	div.posts {
+	div.posts-overview {
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
+
+		div.posts {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
 	}
 </style>
