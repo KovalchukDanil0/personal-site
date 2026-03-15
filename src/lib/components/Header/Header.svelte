@@ -106,7 +106,4 @@
 			flex-direction: column;
 		}
 	}
-
-	div.hamburger-menu {
-	}
 </style>

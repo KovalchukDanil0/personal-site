@@ -3,7 +3,7 @@
 	import { Link } from "$lib/components";
 
 	let { data } = $props();
-	const { postsWithYear, currentYear } = $derived(data);
+	const { postsWithYear } = $derived(data);
 </script>
 
 <svelte:head>
