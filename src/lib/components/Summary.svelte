@@ -12,7 +12,4 @@
 <summary {...restProps}>{@render children()}</summary>
 
 <style lang="scss">
-	summary {
-		cursor: pointer;
-	}
 </style>

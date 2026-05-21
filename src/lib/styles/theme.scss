@@ -1,19 +1,21 @@
-/* Default (light) theme */
-:root {
-	--bg: #ffffff;
-	--text: #111111;
-	--card-bg: #f5f5f5;
-	--border: #dddddd;
-	--btn-bg: #111111;
-	--btn-text: #ffffff;
+@use "variables" as *;
+
+@mixin dark-theme {
+	&:where([data-theme="dark"], [data-theme="dark"] *) {
+		@content;
+	}
 }
 
-/* Dark theme overrides */
-html[data-theme="dark"] {
-	--bg: #0f172a;
-	--text: #e5e7eb;
-	--card-bg: #020617;
-	--border: #1e293b;
-	--btn-bg: #e5e7eb;
-	--btn-text: #020617;
+:root {
+	--bg: #{$d};
+	--text: #{$color-text};
+	--btn-bg: #{$color-text};
+	--btn-text: #{$d};
+
+	@include dark-theme {
+		--bg: #{$color-text};
+		--text: #{$d};
+		--btn-bg: #{$color-text};
+		--btn-text: #{$d};
+	}
 }

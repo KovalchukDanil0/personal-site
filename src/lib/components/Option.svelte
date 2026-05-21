@@ -12,9 +12,3 @@
 <option {...restProps}>
 	{@render children()}
 </option>
-
-<style lang="scss">
-	option {
-		cursor: pointer;
-	}
-</style>

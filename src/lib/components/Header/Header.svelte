@@ -12,7 +12,7 @@
 
 	let { theme, ...restProps }: Props = $props();
 
-	let hamburgerMenuOpened = $state(false);
+	let menuOpened = $state(false);
 </script>
 
 {#snippet toggles()}
@@ -33,19 +33,19 @@
 
 <header {...restProps}>
 	<div class="header-content">
-		<Link href={resolve("/")} variant="text">{m["navigation.title"]()}</Link>
+		<Link href={resolve("/")}>{m["navigation.title"]()}</Link>
 
 		{@render toggles()}
 		{@render navigation()}
 
 		<Button
 			onclick={() => {
-				hamburgerMenuOpened = !hamburgerMenuOpened;
+				menuOpened = !menuOpened;
 			}}>Open Nav Menu</Button
 		>
 	</div>
 
-	{#if hamburgerMenuOpened}
+	{#if menuOpened}
 		<div class="hamburger-menu">
 			<p>Hamburger with Cheese please</p>
 		</div>
@@ -53,7 +53,7 @@
 </header>
 
 <aside {...restProps}>
-	<Link href={resolve("/")} variant="text">{m["navigation.title"]()}</Link>
+	<Link href={resolve("/")}>{m["navigation.title"]()}</Link>
 
 	{@render toggles()}
 	{@render navigation()}
@@ -65,7 +65,7 @@
 		flex-direction: column;
 	}
 
-	div.header-content {
+	.header-content {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -97,7 +97,7 @@
 		gap: 0.35rem;
 	}
 
-	div.toggles {
+	.toggles {
 		display: flex;
 		flex-direction: row;
 		gap: 0.5rem;

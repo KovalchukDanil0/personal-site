@@ -15,7 +15,7 @@ To recreate this project with the same configuration:
 
 ```sh
 # recreate this project
-bun x sv create --template minimal --types ts --add prettier eslint paraglide="languageTags:en, cs+demo:yes" --install bun danylo-space
+bun x sv create --template minimal --types ts --add prettier eslint paraglide="languageTags:en, cs+demo:yes" --install bun my-space
 ```
 
 ## Developing

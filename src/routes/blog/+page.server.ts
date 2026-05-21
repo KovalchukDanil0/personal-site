@@ -1,14 +1,8 @@
-export interface BlogMetadataType {
-	title: string;
-	description: string;
-	date: Date;
-}
+export type BlogItem = { blog: string } & App.BlogGlobType;
 
-interface BlogGlobType {
-	metadata: BlogMetadataType;
-}
-
-export type BlogItem = { blog: string } & BlogGlobType;
+const postsGlob = import.meta.glob<true, string, App.BlogGlobType>("$lib/posts/*.md", {
+	eager: true,
+});
 
 function postsByYear(posts: BlogItem[]): Record<string, BlogItem[]> {
 	return posts.reduce(
@@ -28,10 +22,6 @@ function postsByYear(posts: BlogItem[]): Record<string, BlogItem[]> {
 }
 
 export async function load() {
-	const postsGlob = import.meta.glob<true, string, BlogGlobType>("$lib/posts/*.md", {
-		eager: true,
-	});
-
 	const posts = Object.entries(postsGlob)
 		.map(([path, { metadata }]) => ({
 			blog: path.split("/").pop()?.replace(".md", ""),

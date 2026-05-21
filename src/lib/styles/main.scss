@@ -1,4 +1,4 @@
-@use "normalize.css/normalize.css";
-
-@use "./base.scss";
-@use "./theme.scss";
+@use "normalize.css/normalize";
+@use "prism-themes/themes/prism-atom-dark.min.css";
+@use "base";
+@use "theme";

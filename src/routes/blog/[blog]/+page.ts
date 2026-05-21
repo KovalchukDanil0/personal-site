@@ -1,11 +1,10 @@
 import { m } from "$lib/paraglide/messages";
 import { error } from "@sveltejs/kit";
 import type { Component } from "svelte";
-import type { BlogMetadataType } from "../+page.server";
 
 interface BlogType {
 	default: Component;
-	metadata: BlogMetadataType;
+	metadata: App.BlogMetadataType;
 }
 
 export async function load({ params: { blog } }) {

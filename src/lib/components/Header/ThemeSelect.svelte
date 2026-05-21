@@ -1,16 +1,35 @@
 <script lang="ts">
-	import { setThemeCookie, themes, type Theme } from "$lib/themes";
-	import type { HTMLSelectAttributes } from "svelte/elements";
-	import { Option, Select } from "..";
+	import { setThemeCookie, type Theme } from "$lib/themes";
+	import { Moon, Sun } from "@lucide/svelte";
+	import type { HTMLAttributes } from "svelte/elements";
+	import { Button } from "..";
 
-	interface Props extends HTMLSelectAttributes {
+	interface Props extends HTMLAttributes<EventTarget> {
 		theme: Theme;
 	}
 
 	let { theme, ...restProps }: Props = $props();
 </script>
 
-<Select
+<div {...restProps}>
+	<Button
+		variant="theme-select"
+		onclick={() => {
+			const newTheme: Theme = theme === "dark" ? "light" : "dark";
+
+			theme = newTheme;
+			setThemeCookie(newTheme);
+		}}
+	>
+		{#if theme === "dark"}
+			<Moon />
+		{:else}
+			<Sun />
+		{/if}
+	</Button>
+</div>
+
+<!-- <Select
 	{...restProps}
 	bind:value={theme}
 	onchange={({ currentTarget: { value } }) => {
@@ -24,6 +43,10 @@
 	}}
 >
 	{#each themes as theme (theme)}
-		<Option value={theme}>{theme}</Option>
+		{#if theme === "dark"}
+			<Moon />
+		{:else}
+			<Sun />
+		{/if}
 	{/each}
-</Select>
+</Select> -->

@@ -1,15 +1,11 @@
-import "unplugin-icons/types/svelte";
+declare namespace App {
+	interface BlogMetadataType {
+		title: string;
+		description: string;
+		date: Date;
+	}
 
-// See https://svelte.dev/docs/kit/types#app.d.ts
-// for information about these interfaces
-declare global {
-	namespace App {
-		// interface Error {}
-		// interface Locals {}
-		// interface PageData {}
-		// interface PageState {}
-		// interface Platform {}
+	interface BlogGlobType {
+		metadata: BlogMetadataType;
 	}
 }
-
-export {};

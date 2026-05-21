@@ -18,8 +18,10 @@
 				{year}
 			</summary>
 			<div class="posts">
-				{#each posts as { blog, metadata: { title, date } }}
-					<Link href={resolve("/blog/[blog]", { blog })}>{title} {date}</Link>
+				{#each posts as { metadata: { title, date }, blog }}
+					<h2>{title}</h2>
+					<p>{date}</p>
+					<Link href={resolve("/blog/[blog]", { blog })}>See more</Link>
 				{/each}
 			</div>
 		</details>
@@ -27,12 +29,12 @@
 </div>
 
 <style lang="scss">
-	div.posts-overview {
+	.posts-overview {
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
 
-		div.posts {
+		.posts {
 			display: flex;
 			flex-direction: column;
 			gap: 0.5rem;

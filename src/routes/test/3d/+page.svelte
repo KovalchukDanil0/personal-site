@@ -8,4 +8,6 @@
 	<meta property="description" content="Home Page description" />
 </svelte:head>
 
-<Canvas><Scene /></Canvas>
+<Canvas>
+	<Scene />
+</Canvas>

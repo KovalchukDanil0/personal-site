@@ -1,18 +1,14 @@
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { playwright } from "@vitest/browser-playwright";
-import Icons from "unplugin-icons/vite";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
-import { robots } from "vite-plugin-robots";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
 	build: { minify: true },
 	plugins: [
-		robots(),
 		sveltekit(),
 		ViteImageOptimizer(),
-		Icons({ compiler: "svelte" }),
 		paraglideVitePlugin({
 			project: "./project.inlang",
 			outdir: "./src/lib/paraglide",

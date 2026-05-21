@@ -6,8 +6,8 @@
 	let props: HTMLSelectAttributes = $props();
 
 	const localeNames: Record<Locale, string> = {
-		en: "English",
-		cs: "Czech",
+		en: "🇺🇸",
+		cs: "🇨🇿",
 	};
 
 	const currentLocale = getLocale();
@@ -16,6 +16,7 @@
 <Select
 	{...props}
 	name="locale"
+	variant="lang-select"
 	onchange={async ({ currentTarget: { value } }) => {
 		const locale = value as Locale;
 

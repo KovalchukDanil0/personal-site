@@ -4,7 +4,7 @@
 	import type { Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
-	const variants = ["text", "link-back"] as const;
+	const variants = ["link-back"] as const;
 
 	interface Props extends HTMLAnchorAttributes {
 		children: Snippet;
@@ -23,15 +23,10 @@
 
 <style lang="scss">
 	a {
-		cursor: pointer;
+		text-decoration: none;
 
-		&.text {
-			color: var(--text);
-			text-decoration: none;
-
-			&:hover {
-				color: gray;
-			}
+		&:hover {
+			color: gray;
 		}
 
 		&.link-back {

@@ -12,8 +12,7 @@ export async function load({ data }) {
 
 		if (!data.theme) {
 			const userThemeDark = new MediaQuery("prefers-color-scheme: dark").current;
-			data.theme = userThemeDark ? "dark" : "light";
-			setThemeCookie(data.theme);
+			data.theme = setThemeCookie(userThemeDark ? "dark" : "light");
 		}
 	}
 

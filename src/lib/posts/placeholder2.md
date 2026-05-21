@@ -1,7 +1,7 @@
 ---
-title: How to goat
-description: How to goat description
-date: 2030-01-30
+title: Placeholder
+description: Placeholder
+date: 2040-01-20
 ---
 
 This is **markdown** rendered by SvelteKit 🚀
