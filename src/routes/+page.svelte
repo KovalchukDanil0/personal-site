@@ -1,19 +1,14 @@
 <script>
-	import { Button, Map } from "$lib/components";
-	import { Anvil } from "@lucide/svelte";
+	import { Button } from "$lib/components";
 </script>
 
 <svelte:head>
-	<title>Home Page</title>
+	<title>Danylo Space</title>
 	<meta property="description" content="Home Page description" />
 </svelte:head>
 
 <h1>Home Page</h1>
 <p>Home Page</p>
-
-<Anvil />
-
-<Map />
 
 <Button
 	onclick={async () => {
@@ -22,3 +17,4 @@
 	}}
 	>Test
 </Button>
+12345

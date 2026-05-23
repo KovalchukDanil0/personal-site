@@ -1,4 +1,4 @@
-export { default as Button } from "./Button.svelte";
+export { Button, type Props as NuttonProps } from "./Button";
 export { Footer } from "./Footer";
 export { Header } from "./Header";
 export { default as Link } from "./Link.svelte";

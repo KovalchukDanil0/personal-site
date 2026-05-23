@@ -17,18 +17,20 @@
 </div>
 
 <style lang="scss">
-	@use "$styles/theme" as theme;
-
 	.map {
-		width: 50%;
+		width: 100%;
 		height: 50%;
 
-		&:where(:global([data-theme="dark"]), :global([data-theme="dark"]) *) :global(.leaflet-layer) {
+		@media screen and (width >= 900px) {
+			width: 50%;
+		}
+
+		:global(&:where([data-theme="dark"], [data-theme="dark"] *) .leaflet-layer) {
 			filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
 		}
 	}
 
-	:where(:global([data-theme="dark"]), :global([data-theme="dark"]) *) :global(.leaflet-container) {
+	:global(:where([data-theme="dark"], [data-theme="dark"] *) .leaflet-container) {
 		background-color: black !important;
 	}
 </style>

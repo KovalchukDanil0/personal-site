@@ -1,13 +1,5 @@
 <script lang="ts">
-	import type { Snippet } from "svelte";
-	import type { HTMLButtonAttributes } from "svelte/elements";
-
-	const variants = ["theme-select"] as const;
-
-	interface Props extends HTMLButtonAttributes {
-		children: Snippet;
-		variant?: (typeof variants)[number];
-	}
+	import type { Props } from "./types";
 
 	let { children, variant, ...restProps }: Props = $props();
 </script>

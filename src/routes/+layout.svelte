@@ -3,10 +3,26 @@
 	import favicon from "$lib/assets/favicon.svg";
 	import { Footer, Header, Link } from "$lib/components";
 	import "$lib/styles/main.scss";
+	import { setThemeCookie } from "$lib/themes";
 	import { parentRoute } from "$lib/utils";
+	import { posthog } from "posthog-js";
+	import { onMount } from "svelte";
+	import { MediaQuery } from "svelte/reactivity";
 
 	let { children, data } = $props();
 	let { theme, currentYear } = $derived(data);
+
+	posthog.init("TOKEN", {
+		api_host: "https://us.i.posthog.com",
+		defaults: "2025-11-30",
+	});
+
+	onMount(() => {
+		if (!theme) {
+			const userThemeDark = new MediaQuery("prefers-color-scheme: dark").current;
+			theme = setThemeCookie(userThemeDark ? "dark" : "light");
+		}
+	});
 
 	const parentUrl = $derived(parentRoute(page.url.pathname));
 </script>

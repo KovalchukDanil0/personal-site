@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { afterNavigate } from "$app/navigation";
 	import { resolve } from "$app/paths";
 	import { m } from "$lib/paraglide/messages";
 	import type { Theme } from "$lib/themes";
@@ -12,15 +13,17 @@
 
 	let { theme, ...restProps }: Props = $props();
 
+	afterNavigate(() => {
+		menuOpened = false;
+	});
+
 	let menuOpened = $state(false);
 </script>
 
 {#snippet toggles()}
 	<div class="toggles">
 		<LangSelect />
-		{#if theme}
-			<ThemeSelect {theme} />
-		{/if}
+		<ThemeSelect {theme} />
 	</div>
 {/snippet}
 
@@ -36,7 +39,6 @@
 		<Link href={resolve("/")}>{m["navigation.title"]()}</Link>
 
 		{@render toggles()}
-		{@render navigation()}
 
 		<Button
 			onclick={() => {
@@ -47,7 +49,7 @@
 
 	{#if menuOpened}
 		<div class="hamburger-menu">
-			<p>Hamburger with Cheese please</p>
+			{@render navigation()}
 		</div>
 	{/if}
 </header>
@@ -93,17 +95,21 @@
 
 	nav {
 		display: flex;
-		align-items: center;
-		gap: 0.35rem;
+		flex-direction: column;
+		align-items: start;
+		justify-items: center;
+		gap: 0.5rem;
+
+		@media screen and (width < 900px) {
+			flex-direction: row;
+		}
 	}
 
 	.toggles {
 		display: flex;
 		flex-direction: row;
+		align-items: center;
+		justify-content: center;
 		gap: 0.5rem;
-
-		@media screen and (width >= 900px) {
-			flex-direction: column;
-		}
 	}
 </style>
