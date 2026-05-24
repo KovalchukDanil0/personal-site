@@ -2,7 +2,7 @@
 	import { page } from "$app/state";
 	import favicon from "$lib/assets/favicon.svg";
 	import { Footer, Header, Link } from "$lib/components";
-	import "$lib/styles/main.scss";
+	import "$lib/styles/_index.scss";
 	import { setThemeCookie } from "$lib/themes";
 	import { parentRoute } from "$lib/utils";
 	import { posthog } from "posthog-js";
@@ -31,9 +31,9 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<Header {theme} />
+<div class="gg">
+	<Header {theme} />
 
-<div class="content">
 	<main>
 		{#if parentUrl}
 			<Link variant="link-back" href={parentUrl.url}>
@@ -47,19 +47,21 @@
 		<!-- eslint-disable-next-line @typescript-eslint/no-unsafe-call -->
 		{@render children()}
 	</main>
-
-	<Footer {currentYear} />
 </div>
 
-<style lang="scss">
-	.content {
-		width: 100%;
-		height: 100%;
+<Footer {currentYear} />
 
+<style lang="scss">
+	.gg {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		flex-grow: 1;
 		align-items: start;
-		gap: 0.5rem;
+		justify-content: center;
+
+		@media screen and (width < 900px) {
+			flex-direction: column;
+		}
 	}
 
 	main {
@@ -67,5 +69,9 @@
 		flex-direction: column;
 		align-items: start;
 		gap: 0.5rem;
+
+		@media screen and (width >= 900px) {
+			padding-left: 1rem;
+		}
 	}
 </style>

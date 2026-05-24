@@ -12,3 +12,10 @@
 <option {...restProps}>
 	{@render children()}
 </option>
+
+<style lang="scss">
+	option {
+		color: var(--text-color);
+		cursor: pointer;
+	}
+</style>

@@ -1,12 +1,14 @@
-* {
+@use "theme" as t;
+
+:root {
 	font-family: "Open Sans", sans-serif;
 }
 
 html,
 body,
 main {
-	background-color: var(--bg);
-	color: var(--text);
+	background-color: var(--background-color);
+	color: var(--text-color);
 	height: 100%;
 	width: 100%;
 	overflow-x: hidden;
@@ -22,10 +24,6 @@ body {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-
-	@media screen and (width >= 900px) {
-		flex-direction: row;
-	}
 }
 
 p,
@@ -35,17 +33,6 @@ h2,
 h3,
 h4,
 h5,
-h6,
-select,
-option,
-summary {
-	color: var(--text);
-}
-
-a,
-summary,
-button,
-option,
-select {
-	cursor: pointer;
+h6 {
+	color: var(--text-color);
 }

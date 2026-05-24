@@ -18,6 +18,9 @@
 
 <style lang="scss">
 	select {
+		color: var(--text-color);
+		cursor: pointer;
+
 		&.lang-select {
 			border: none;
 			background: inherit;

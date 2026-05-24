@@ -12,4 +12,8 @@
 <summary {...restProps}>{@render children()}</summary>
 
 <style lang="scss">
+	summary {
+		color: var(--text-color);
+		cursor: pointer;
+	}
 </style>

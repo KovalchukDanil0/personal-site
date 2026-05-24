@@ -1,23 +1,16 @@
 <script lang="ts">
-	import { afterNavigate } from "$app/navigation";
 	import { resolve } from "$app/paths";
 	import { m } from "$lib/paraglide/messages";
 	import type { Theme } from "$lib/themes";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { LangSelect, ThemeSelect } from ".";
-	import { Button, Link } from "..";
+	import { Link } from "..";
 
 	interface Props extends HTMLAttributes<EventTarget> {
 		theme?: Theme;
 	}
 
 	let { theme, ...restProps }: Props = $props();
-
-	afterNavigate(() => {
-		menuOpened = false;
-	});
-
-	let menuOpened = $state(false);
 </script>
 
 {#snippet toggles()}
@@ -39,19 +32,9 @@
 		<Link href={resolve("/")}>{m["navigation.title"]()}</Link>
 
 		{@render toggles()}
-
-		<Button
-			onclick={() => {
-				menuOpened = !menuOpened;
-			}}>Open Nav Menu</Button
-		>
 	</div>
 
-	{#if menuOpened}
-		<div class="hamburger-menu">
-			{@render navigation()}
-		</div>
-	{/if}
+	{@render navigation()}
 </header>
 
 <aside {...restProps}>
@@ -65,6 +48,11 @@
 	header {
 		display: flex;
 		flex-direction: column;
+		width: 100%;
+
+		@media screen and (width >= 900px) {
+			display: none;
+		}
 	}
 
 	.header-content {
@@ -74,10 +62,6 @@
 		justify-content: space-between;
 		width: auto;
 		gap: 0.5rem;
-
-		@media screen and (width >= 900px) {
-			display: none;
-		}
 	}
 
 	aside {
@@ -87,6 +71,7 @@
 		align-items: baseline;
 		width: 20%;
 		gap: 0.5rem;
+		height: 100%;
 
 		@media screen and (width < 900px) {
 			display: none;
@@ -96,12 +81,14 @@
 	nav {
 		display: flex;
 		flex-direction: column;
+		flex-grow: 1;
 		align-items: start;
-		justify-items: center;
+		justify-content: start;
 		gap: 0.5rem;
 
 		@media screen and (width < 900px) {
 			flex-direction: row;
+			justify-content: space-around;
 		}
 	}
 

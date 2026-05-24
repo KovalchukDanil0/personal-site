@@ -1,12 +1,11 @@
 <script>
+	import { MetaTags } from "svelte-meta-tags";
+
 	let { data } = $props();
 	const { content: Content, title, description, date } = $derived(data);
 </script>
 
-<svelte:head>
-	<title>{title}</title>
-	<meta property="description" content={description} />
-</svelte:head>
+<MetaTags {title} {description} />
 
 <article>
 	<h1>{title}</h1>

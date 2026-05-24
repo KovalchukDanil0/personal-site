@@ -1,21 +1,28 @@
-@use "variables" as *;
-
-@mixin dark-theme {
-	&:where([data-theme="dark"], [data-theme="dark"] *) {
-		@content;
-	}
-}
+@use "variables" as v;
 
 :root {
-	--bg: #{$d};
-	--text: #{$color-text};
-	--btn-bg: #{$color-text};
-	--btn-text: #{$d};
+	--primary-color: #{v.$primary-color-light};
+	--secondary-color: #{v.$secondary-color-light};
 
-	@include dark-theme {
-		--bg: #{$color-text};
-		--text: #{$d};
-		--btn-bg: #{$color-text};
-		--btn-text: #{$d};
+	--background-color: #{v.$background-color-light};
+	--button-text-color: #{v.$text-color-dark};
+	--button-background-color: #{v.$background-color-light};
+	--text-color: #{v.$text-color-dark};
+
+	--leaflet-background-color: white;
+	--leaflet-filter: none;
+
+	&[data-theme="dark"] {
+		--primary-color: #{v.$primary-color-dark};
+		--secondary-color: #{v.$secondary-color-dark};
+
+		--background-color: #{v.$background-color-dark};
+		--button-text-color: #{v.$text-color-light};
+		--button-background-color: #{v.$background-color-dark};
+		--text-color: #{v.$text-color-light};
+
+		--leaflet-background-color: black;
+		--leaflet-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3)
+			brightness(0.7);
 	}
 }

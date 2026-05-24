@@ -1,14 +1,13 @@
 <script lang="ts">
+	import { MetaTags } from "svelte-meta-tags";
+
 	let { data } = $props();
 	let { pdf } = $derived(data);
 
 	const pdfSrc = () => `data:application/pdf;base64,${pdf}`;
 </script>
 
-<svelte:head>
-	<title>Resume</title>
-	<meta property="description" content="Resume" />
-</svelte:head>
+<MetaTags title="Resume" description="Resume" />
 
 <h1>Resume goes here</h1>
 

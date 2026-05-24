@@ -1,22 +1,20 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import { Link } from "$lib/components";
+	import { Link, Summary } from "$lib/components";
+	import { MetaTags } from "svelte-meta-tags";
 
 	let { data } = $props();
 	const { postsWithYear } = $derived(data);
 </script>
 
-<svelte:head>
-	<title>Blog overview</title>
-	<meta property="description" content="Blog overview description" />
-</svelte:head>
+<MetaTags title="Blog overview" description="Blog overview description" />
 
 <div class="posts-overview">
 	{#each Object.entries(postsWithYear) as [year, posts] (year)}
 		<details open>
-			<summary>
+			<Summary>
 				{year}
-			</summary>
+			</Summary>
 			<div class="posts">
 				{#each posts as { metadata: { title, date }, blog }}
 					<h2>{title}</h2>

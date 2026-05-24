@@ -16,13 +16,13 @@
 		justify-content: center;
 
 		border: none;
-		border-radius: 0.25rem;
-		background-color: var(--btn-bg);
-		color: var(--btn-text);
+		color: var(--button-text-color);
+
+		cursor: pointer;
 
 		&.theme-select {
 			background: none;
-			color: var(--text);
+			color: var(--text-color);
 		}
 	}
 </style>

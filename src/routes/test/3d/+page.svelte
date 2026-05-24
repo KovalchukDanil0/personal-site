@@ -1,12 +1,10 @@
 <script>
 	import { Canvas } from "@threlte/core";
+	import { MetaTags } from "svelte-meta-tags";
 	import Scene from "./Scene.svelte";
 </script>
 
-<svelte:head>
-	<title>Home Page</title>
-	<meta property="description" content="Home Page description" />
-</svelte:head>
+<MetaTags title="Home Page" description="Home Page description" />
 
 <Canvas>
 	<Scene />

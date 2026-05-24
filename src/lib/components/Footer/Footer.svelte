@@ -11,9 +11,3 @@
 <footer {...restProps}>
 	{currentYear}
 </footer>
-
-<style lang="scss">
-	footer {
-		flex-grow: 1;
-	}
-</style>
