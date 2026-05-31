@@ -1,12 +1,12 @@
 import { noCase } from "change-case";
 
-export function mergeClass(...args: (string | null | boolean | undefined)[]) {
-	return args.filter((item) => !!item).join(" ");
-}
-
 interface ParentRoute {
 	url: string;
 	name: string | null;
+}
+
+export function mergeClass(...args: (string | null | boolean | undefined)[]) {
+	return args.filter((item) => !!item).join(" ");
 }
 
 export function parentRoute(pathname: string): ParentRoute | undefined {

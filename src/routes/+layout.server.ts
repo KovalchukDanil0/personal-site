@@ -1,11 +1,9 @@
 import type { Theme } from "$lib/themes";
+import type { ServerLoadEvent } from "@sveltejs/kit";
 
-export async function load({ cookies }) {
+export function load({ cookies }: ServerLoadEvent) {
 	const theme = cookies.get("theme") as Theme | undefined;
 	const currentYear = new Date(Date.now()).getFullYear();
 
-	return {
-		theme,
-		currentYear,
-	};
+	return { currentYear, theme };
 }

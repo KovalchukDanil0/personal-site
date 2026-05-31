@@ -1,3 +1,5 @@
-export async function load({ data }) {
+import type { LayoutLoadEvent } from "./$types";
+
+export function load({ data }: LayoutLoadEvent) {
 	return data;
 }

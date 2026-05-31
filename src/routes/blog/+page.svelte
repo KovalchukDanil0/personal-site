@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import { Link, Summary } from "$lib/components";
-	import { MetaTags } from "svelte-meta-tags";
+	import { Link, MetaTags, Summary } from "$lib/components";
+	import type { PageProps } from "./$types";
 
-	let { data } = $props();
+	let { data }: PageProps = $props();
 	const { postsWithYear } = $derived(data);
 </script>
 
@@ -16,7 +16,7 @@
 				{year}
 			</Summary>
 			<div class="posts">
-				{#each posts as { metadata: { title, date }, blog }}
+				{#each posts as { metadata: { title, date }, blog } (blog)}
 					<h2>{title}</h2>
 					<p>{date}</p>
 					<Link href={resolve("/blog/[blog]", { blog })}>See more</Link>

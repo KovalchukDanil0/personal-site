@@ -4,6 +4,8 @@ import { playwright } from "@vitest/browser-playwright";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import { defineConfig } from "vitest/config";
 
+const CLIENT_TESTS = ["src/**/*.svelte.test.ts"];
+
 export default defineConfig({
 	build: { minify: true },
 	plugins: [
@@ -33,29 +35,31 @@ export default defineConfig({
 		}),
 	],
 	resolve: process.env.VITEST ? { conditions: ["browser"] } : undefined,
+
 	test: {
 		expect: { requireAssertions: true },
+		includeTaskLocation: true,
 		projects: [
 			{
-				extends: "./vite.config.ts",
+				extends: true,
 				test: {
 					name: "client",
 					browser: {
 						enabled: true,
-						provider: playwright(),
+						provider: playwright({ contextOptions: { colorScheme: "dark" } }),
 						instances: [{ browser: "chromium", headless: false }],
 					},
-					include: ["src/**/*.svelte.{test,spec}.{js,ts}"],
+					include: CLIENT_TESTS,
 					exclude: ["src/lib/server/**"],
 				},
 			},
 			{
-				extends: "./vite.config.ts",
+				extends: true,
 				test: {
 					name: "server",
 					environment: "node",
-					include: ["src/**/*.{test,spec}.{js,ts}"],
-					exclude: ["src/**/*.svelte.{test,spec}.{js,ts}"],
+					include: ["src/**/*.test.{js,ts}"],
+					exclude: CLIENT_TESTS,
 				},
 			},
 		],

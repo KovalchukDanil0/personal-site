@@ -4,20 +4,26 @@
 	import type { Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
-	const variants = ["link-back", "button"] as const;
+	type Variants = "link-back" | "button";
 
-	interface Props extends HTMLAnchorAttributes {
+	interface Props extends Omit<HTMLAnchorAttributes, "target"> {
 		children: Snippet;
 		href: string;
-		variant?: (typeof variants)[number];
+		newTab?: boolean;
+		variant?: Variants;
 	}
 
-	let { class: className, href, children, variant, ...restProps }: Props = $props();
+	let { class: className, href, newTab, variant, children, ...restProps }: Props = $props();
 </script>
 
+<!-- eslint-disable svelte/no-navigation-without-resolve -->
+<!-- eslint-disable @typescript-eslint/no-base-to-string -->
+
 <a
-	class={mergeClass(className?.toString(), variant && variants.includes(variant) && variant)}
+	class={mergeClass(className?.toString(), variant)}
 	href={localizeHref(href)}
+	target={newTab ? "_blank" : null}
+	rel={newTab ? "noopener noreferrer" : null}
 	{...restProps}>{@render children()}</a
 >
 

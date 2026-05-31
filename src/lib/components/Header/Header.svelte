@@ -4,13 +4,14 @@
 	import type { Theme } from "$lib/themes";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { LangSelect, ThemeSelect } from ".";
-	import { Link } from "..";
+	import { Footer, Link } from "..";
 
 	interface Props extends HTMLAttributes<EventTarget> {
+		currentYear: number;
 		theme?: Theme;
 	}
 
-	let { theme, ...restProps }: Props = $props();
+	let { theme, currentYear, ...restProps }: Props = $props();
 </script>
 
 {#snippet toggles()}
@@ -40,8 +41,10 @@
 <aside {...restProps}>
 	<Link href={resolve("/")}>{m["navigation.title"]()}</Link>
 
-	{@render toggles()}
 	{@render navigation()}
+	{@render toggles()}
+
+	<Footer {currentYear} />
 </aside>
 
 <style lang="scss">
@@ -69,9 +72,13 @@
 		flex-direction: column;
 		justify-content: start;
 		align-items: baseline;
-		width: 20%;
+		width: var(--aside-width);
 		gap: 0.5rem;
-		height: 100%;
+
+		position: fixed;
+		left: var(--content-padding);
+		bottom: var(--content-padding);
+		top: var(--content-padding);
 
 		@media screen and (width < 900px) {
 			display: none;

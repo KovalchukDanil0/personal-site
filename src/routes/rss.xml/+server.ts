@@ -1,17 +1,26 @@
 import XMLBuilder from "fast-xml-builder";
+import type { RequestEvent } from "./$types";
 
 const posts = import.meta.glob<true, string, App.BlogGlobType>("$lib/posts/*.md", {
 	eager: true,
 });
 
-export async function GET({ url: { origin: site } }) {
+export function GET({ url: { origin: site } }: RequestEvent) {
 	const items = Object.entries(posts)
-		.map(([path, { metadata }]) => ({
-			slug: path.split("/").pop()?.replace(".md", ""),
-			title: metadata.title,
-			description: metadata.description,
-			date: metadata.date,
-		}))
+		.map(([path, { metadata }]) => {
+			const slug = path.split("/").pop()?.replace(".md", "");
+			if (!slug) {
+				return null;
+			}
+
+			return {
+				title: metadata.title,
+				description: metadata.description,
+				date: metadata.date,
+				slug,
+			};
+		})
+		.filter((item) => !!item)
 		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 	const builder = new XMLBuilder({

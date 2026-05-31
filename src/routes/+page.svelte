@@ -1,14 +1,14 @@
-<script>
+<script lang="ts">
 	import { resolve } from "$app/paths";
-	import { Link } from "$lib/components";
-	import { email, github, linkedIn } from "$lib/info";
-	import { MetaTags } from "svelte-meta-tags";
+	import { Link, MetaTags } from "$lib/components";
+	import { Vml } from "$lib/components/icons";
+	import { email, github, linkedIn, myName } from "$lib/info";
 </script>
 
-<MetaTags title="Danylo Space" description="Home Page description" />
+<MetaTags title="Hello" description="Home Page description" />
 
 <section>
-	<h1>Hey, I am <span class="accent">Danylo</span>!</h1>
+	<h1>Hey, I am <span class="accent">{myName}</span>!</h1>
 	<p>Full-Stack Web Developer based in Czech Republic, Prague</p>
 	<q><i>Being a fullstack dev is being equally bad at backend and frontend</i></q>
 	<div class="buttons">
@@ -19,17 +19,20 @@
 
 <section>
 	<h2>About Me</h2>
-	<p>Lorem ipsum dorem</p>
+	<p>
+		Full-Stack Web Developer with experience of automating complex workflows. Have passion of
+		finding different non-usual <s>workarounds</s> ways to solve a problems
+	</p>
 	<div class="buttons">
-		<Link href={github} target="_blank" variant="button">GitHub</Link>
-		<Link href={linkedIn} target="_blank" variant="button">LinkedIn</Link>
+		<Link href={github} variant="button" newTab>GitHub</Link>
+		<Link href={linkedIn} variant="button" newTab>LinkedIn</Link>
 		<Link href="mailto:{email}" variant="button">Email</Link>
 	</div>
 </section>
 
 <section>
 	<h2>Work Experience</h2>
-	<p>VML</p>
+	<Vml width="30%" height="10%" />
 	<p>MDU</p>
 </section>
 
@@ -53,6 +56,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
+		align-items: start;
+		justify-content: space-evenly;
 
 		> p {
 			margin: 0;

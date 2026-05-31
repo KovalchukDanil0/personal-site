@@ -2,14 +2,15 @@
 	import type { Snippet } from "svelte";
 	import type { HTMLSelectAttributes } from "svelte/elements";
 
-	const variants = ["lang-select"] as const;
+	type Variants = "lang-select";
 
 	interface Props extends HTMLSelectAttributes {
 		children: Snippet;
-		variant?: (typeof variants)[number];
+		value: string;
+		variant?: Variants;
 	}
 
-	let { value = $bindable(), children, variant, ...restProps }: Props = $props();
+	let { value, children, variant, ...restProps }: Props = $props();
 </script>
 
 <select {...restProps} class={variant} {value}>

@@ -1,21 +1,27 @@
 <script lang="ts">
-	import { MetaTags } from "svelte-meta-tags";
-
-	let { data } = $props();
-	let { pdf } = $derived(data);
-
-	const pdfSrc = () => `data:application/pdf;base64,${pdf}`;
+	import { asset } from "$app/paths";
+	import { MetaTags } from "$lib/components";
 </script>
 
-<MetaTags title="Resume" description="Resume" />
+<MetaTags title="Resume of" description="Resume" />
 
 <h1>Resume goes here</h1>
 
-<embed type="application/pdf" src={pdfSrc()} />
+<embed src={asset("/resume.pdf")} type="application/pdf" />
+
+<img
+	class="will-work-for-beer"
+	src={asset("/will-work-for-beer-jon-neidert.jpg")}
+	alt="Will Work for Beer"
+/>
 
 <style lang="scss">
 	embed {
 		width: 100%;
-		height: 100%;
+		min-height: 90vh;
+	}
+
+	.will-work-for-beer {
+		z-index: -10;
 	}
 </style>

@@ -1,38 +1,57 @@
 <script lang="ts">
 	import { page } from "$app/state";
 	import favicon from "$lib/assets/favicon.svg";
-	import { Footer, Header, Link } from "$lib/components";
+	import { Header, Link, MetaTags } from "$lib/components";
+	import { myName } from "$lib/info";
 	import "$lib/styles/_index.scss";
 	import { setThemeCookie } from "$lib/themes";
 	import { parentRoute } from "$lib/utils";
 	import { posthog } from "posthog-js";
 	import { onMount } from "svelte";
 	import { MediaQuery } from "svelte/reactivity";
+	import type { LayoutProps } from "./$types";
 
-	let { children, data } = $props();
-	let { theme, currentYear } = $derived(data);
+	let { children, data }: LayoutProps = $props();
+	let { currentYear, theme } = $derived(data);
 
 	posthog.init("TOKEN", {
 		api_host: "https://us.i.posthog.com",
 		defaults: "2025-11-30",
 	});
 
+	const parentUrl = $derived(parentRoute(page.url.pathname));
+
+	let initTitle = $state<string>();
+	let title = $state<string>();
+
 	onMount(() => {
 		if (!theme) {
 			const userThemeDark = new MediaQuery("prefers-color-scheme: dark").current;
 			theme = setThemeCookie(userThemeDark ? "dark" : "light");
 		}
-	});
 
-	const parentUrl = $derived(parentRoute(page.url.pathname));
+		initTitle = document.title.replace(new RegExp(`\\s+-\\s+${myName}`), "");
+		console.log(initTitle);
+	});
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="gg">
-	<Header {theme} />
+<svelte:window
+	onblur={() => {
+		title = "Come back again";
+	}}
+	onfocus={() => {
+		title = initTitle;
+	}}
+/>
+
+<MetaTags {title} />
+
+<div class="content">
+	<Header {theme} {currentYear} />
 
 	<main>
 		{#if parentUrl}
@@ -49,10 +68,8 @@
 	</main>
 </div>
 
-<Footer {currentYear} />
-
 <style lang="scss">
-	.gg {
+	.content {
 		display: flex;
 		flex-direction: row;
 		flex-grow: 1;
@@ -69,8 +86,11 @@
 		flex-direction: column;
 		align-items: start;
 		gap: 0.5rem;
+		z-index: 50;
+		overflow-y: hidden;
 
 		@media screen and (width >= 900px) {
+			margin-left: var(--aside-width);
 			padding-left: 1rem;
 		}
 	}

@@ -6,7 +6,7 @@ import { defineConfig } from "eslint/config";
 import globals from "globals";
 import path from "node:path";
 import ts from "typescript-eslint";
-import svelteConfig from "./svelte.config";
+import svelteConfig from "./svelte.config.js";
 
 const gitignorePath = path.resolve(import.meta.dirname, ".gitignore");
 
@@ -18,7 +18,9 @@ export default defineConfig(
 	prettier,
 	...svelte.configs.prettier,
 	{
-		languageOptions: { globals: { ...globals.browser, ...globals.node } },
+		languageOptions: {
+			globals: { ...globals.browser, ...globals.node },
+		},
 		rules: {
 			"no-undef": "off",
 
@@ -33,14 +35,45 @@ export default defineConfig(
 		},
 	},
 	{
+		files: ["**/*.ts", "**/*.js"],
+		languageOptions: {
+			parserOptions: {
+				projectService: true,
+			},
+		},
+	},
+	{
 		files: ["**/*.svelte", "**/*.svelte.ts", "**/*.svelte.js"],
 		languageOptions: {
 			parserOptions: {
 				projectService: true,
-				extraFileExtensions: [".svelte"],
 				parser: ts.parser,
+				extraFileExtensions: [".svelte"],
 				svelteConfig,
 			},
+		},
+		rules: {
+			"@typescript-eslint/no-base-to-string": "warn",
+			"@typescript-eslint/no-confusing-void-expression": "warn",
+			"@typescript-eslint/no-unsafe-call": "warn",
+
+			"svelte/block-lang": [
+				"error",
+				{
+					script: ["ts"],
+					style: "scss",
+				},
+			],
+			"svelte/no-navigation-without-resolve": "warn",
+			"svelte/button-has-type": "error",
+			"svelte/no-add-event-listener": "error",
+			"svelte/no-ignored-unsubscribe": "error",
+			"svelte/no-inline-styles": "error",
+			"svelte/prefer-const": "error",
+			"svelte/prefer-destructured-store-props": "error",
+			"svelte/require-optimized-style-attribute": "error",
+			"svelte/require-stores-init": "error",
+			"svelte/no-unused-class-name": "warn",
 		},
 	}
 );

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import "./index.scss";
+	import "./_index.scss";
 
 	const pragueLatLng = [50.0875, 14.421389];
 </script>

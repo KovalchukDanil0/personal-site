@@ -1,7 +1,8 @@
-<script>
-	import { MetaTags } from "svelte-meta-tags";
+<script lang="ts">
+	import { MetaTags } from "$lib/components";
+	import type { PageProps } from "./$types";
 
-	let { data } = $props();
+	let { data }: PageProps = $props();
 	const { content: Content, title, description, date } = $derived(data);
 </script>
 

@@ -5,23 +5,20 @@ const postsGlob = import.meta.glob<true, string, App.BlogGlobType>("$lib/posts/*
 });
 
 function postsByYear(posts: BlogItem[]): Record<string, BlogItem[]> {
-	return posts.reduce(
-		(acc, blog) => {
-			const year = blog.metadata.date.getFullYear().toString();
+	return posts.reduce<Record<string, BlogItem[]>>((acc, blog) => {
+		const year = blog.metadata.date.getFullYear().toString();
 
-			if (!acc[year]) {
-				acc[year] = [];
-			}
+		if (!acc[year]) {
+			acc[year] = [];
+		}
 
-			acc[year].push(blog);
+		acc[year].push(blog);
 
-			return acc;
-		},
-		{} as Record<string, BlogItem[]>
-	);
+		return acc;
+	}, {});
 }
 
-export async function load() {
+export function load() {
 	const posts = Object.entries(postsGlob)
 		.map(([path, { metadata }]) => ({
 			blog: path.split("/").pop()?.replace(".md", ""),

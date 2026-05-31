@@ -1,6 +1,6 @@
-<script>
+<script lang="ts">
 	import { Canvas } from "@threlte/core";
-	import { MetaTags } from "svelte-meta-tags";
+	import { MetaTags } from "$lib/components";
 	import Scene from "./Scene.svelte";
 </script>
 
