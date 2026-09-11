@@ -2,7 +2,7 @@ import { simpleComponent } from "$lib/utils.svelte";
 import { describe, expect, it } from "vitest";
 import { render } from "vitest-browser-svelte";
 import { page } from "vitest/browser";
-import Button from "./Button.svelte";
+import { Button } from ".";
 
 const TEXT_TO_CHECK = "Hello World!";
 

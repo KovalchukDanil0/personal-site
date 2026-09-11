@@ -1,25 +1,28 @@
 import XMLBuilder from "fast-xml-builder";
-import type { RequestEvent } from "./$types";
+import { postsGlob } from "..";
 
-const posts = import.meta.glob<true, string, App.BlogGlobType>("$lib/posts/*.md", {
-	eager: true,
-});
+export function GET({ url: { origin: site } }) {
+	const items = Object.entries(postsGlob)
+		.map(
+			([
+				path,
+				{
+					metadata: { title, date, description },
+				},
+			]) => {
+				const slug = path.split("/").pop()?.replace(".md", "");
+				if (!slug) {
+					return null;
+				}
 
-export function GET({ url: { origin: site } }: RequestEvent) {
-	const items = Object.entries(posts)
-		.map(([path, { metadata }]) => {
-			const slug = path.split("/").pop()?.replace(".md", "");
-			if (!slug) {
-				return null;
+				return {
+					title,
+					description,
+					date,
+					slug,
+				};
 			}
-
-			return {
-				title: metadata.title,
-				description: metadata.description,
-				date: metadata.date,
-				slug,
-			};
-		})
+		)
 		.filter((item) => !!item)
 		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -31,7 +34,7 @@ export function GET({ url: { origin: site } }: RequestEvent) {
 	const xml = builder.build({
 		"?xml": {
 			"@_version": "1.0",
-			"@_encoding": "UTF-8",
+			"@_encoding": "utf8",
 		},
 
 		rss: {
@@ -46,7 +49,7 @@ export function GET({ url: { origin: site } }: RequestEvent) {
 					link: `${site}/blog/${slug}`,
 					guid: `${site}/blog/${slug}`,
 					pubDate: new Date(date).toUTCString(),
-					description: description,
+					description,
 					title,
 				})),
 			},

@@ -12,9 +12,9 @@
 	let y = $state(200);
 
 	onTick((ticker) => {
-		const time = ticker.lastTime / 500;
-		x = 360 + Math.cos(time) * 50;
-		y = 200 + Math.sin(time) * 50;
+		const TIME = ticker.lastTime / 500;
+		x = 360 + Math.cos(TIME) * 50;
+		y = 200 + Math.sin(TIME) * 50;
 	});
 </script>
 

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { localizeHref } from "$lib/paraglide/runtime";
-	import { mergeClass } from "$lib/utils";
 	import type { Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
@@ -10,17 +9,23 @@
 		children: Snippet;
 		href: string;
 		newTab?: boolean;
+		underline?: boolean;
 		variant?: Variants;
 	}
 
-	let { class: className, href, newTab, variant, children, ...restProps }: Props = $props();
+	let {
+		class: className,
+		underline,
+		variant,
+		href,
+		newTab,
+		children,
+		...restProps
+	}: Props = $props();
 </script>
 
-<!-- eslint-disable svelte/no-navigation-without-resolve -->
-<!-- eslint-disable @typescript-eslint/no-base-to-string -->
-
 <a
-	class={mergeClass(className?.toString(), variant)}
+	class={[className?.toString(), variant, underline && "underline"]}
 	href={localizeHref(href)}
 	target={newTab ? "_blank" : null}
 	rel={newTab ? "noopener noreferrer" : null}
@@ -36,6 +41,10 @@
 			color: gray;
 		}
 
+		&.underline {
+			text-decoration: underline;
+		}
+
 		&.link-back {
 			margin-bottom: 0.5rem;
 		}
@@ -43,6 +52,7 @@
 		&.button {
 			display: inline-block;
 			padding: 0.75rem 1rem;
+			text-decoration: none;
 			background-color: var(--button-background-color);
 			color: var(--button-text-color);
 

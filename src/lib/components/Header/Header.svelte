@@ -3,10 +3,10 @@
 	import { m } from "$lib/paraglide/messages";
 	import type { Theme } from "$lib/themes";
 	import type { HTMLAttributes } from "svelte/elements";
-	import { LangSelect, ThemeSelect } from ".";
-	import { Footer, Link } from "..";
+	import { ThemeSelect } from ".";
+	import { Footer, LangSelect, Link } from "..";
 
-	interface Props extends HTMLAttributes<EventTarget> {
+	interface Props extends Omit<HTMLAttributes<EventTarget>, "children"> {
 		currentYear: number;
 		theme?: Theme;
 	}
@@ -49,6 +49,7 @@
 
 <style lang="scss">
 	header {
+		view-transition-name: header;
 		display: flex;
 		flex-direction: column;
 		width: 100%;
@@ -68,6 +69,7 @@
 	}
 
 	aside {
+		view-transition-name: header;
 		display: flex;
 		flex-direction: column;
 		justify-content: start;

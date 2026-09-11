@@ -1,8 +1,4 @@
-export type BlogItem = { blog: string } & App.BlogGlobType;
-
-const postsGlob = import.meta.glob<true, string, App.BlogGlobType>("$lib/posts/*.md", {
-	eager: true,
-});
+import { postsGlob, type BlogItem } from ".";
 
 function postsByYear(posts: BlogItem[]): Record<string, BlogItem[]> {
 	return posts.reduce<Record<string, BlogItem[]>>((acc, blog) => {
@@ -24,7 +20,7 @@ export function load() {
 			blog: path.split("/").pop()?.replace(".md", ""),
 			metadata: { ...metadata, date: new Date(metadata.date) },
 		}))
-		.filter((post): post is BlogItem => !!post.blog);
+		.filter((post): post is BlogItem => Boolean(post.blog));
 
 	return {
 		postsWithYear: postsByYear(posts),

@@ -5,13 +5,9 @@ interface ParentRoute {
 	name: string | null;
 }
 
-export function mergeClass(...args: (string | null | boolean | undefined)[]) {
-	return args.filter((item) => !!item).join(" ");
-}
-
 export function parentRoute(pathname: string): ParentRoute | undefined {
-	const parts = pathname.split("/").filter((item) => !!item);
-	if (!parts.length) {
+	const parts = pathname.split("/").filter(Boolean);
+	if (parts.length === 0) {
 		return;
 	}
 
@@ -21,7 +17,11 @@ export function parentRoute(pathname: string): ParentRoute | undefined {
 
 	const parentRouteName = parts.at(-2);
 	return {
-		url: "/" + parts.slice(0, -1).join("/"),
+		url: `/${parts.slice(0, -1).join("/")}`,
 		name: parentRouteName ? noCase(parentRouteName) : null,
 	};
+}
+
+export function normalizeUrl(input: string) {
+	return /^https?:\/\//iu.test(input) ? input : `https://${input}`;
 }

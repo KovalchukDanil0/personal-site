@@ -5,8 +5,8 @@ Dockerfile
 .gitattributes
 README.md
 .npmrc
-prettier.config.js
-eslint.config.js
+.prettierrc.json
+.oxlintrc.json
 .graphqlrc
 .editorconfig
 .svelte-kit

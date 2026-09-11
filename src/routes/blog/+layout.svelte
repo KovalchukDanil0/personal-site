@@ -1,7 +1,5 @@
 <script lang="ts">
-	import type { LayoutProps } from "./$types";
-
-	let { children }: LayoutProps = $props();
+	let { children } = $props();
 </script>
 
 <div class="blog">

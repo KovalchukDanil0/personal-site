@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
 	import { Link, MetaTags, Summary } from "$lib/components";
-	import type { PageProps } from "./$types";
 
-	let { data }: PageProps = $props();
-	const { postsWithYear } = $derived(data);
+	let { data } = $props();
+	let { postsWithYear } = $derived(data);
 </script>
 
 <MetaTags title="Blog overview" description="Blog overview description" />

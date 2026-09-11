@@ -4,7 +4,7 @@
 
 	type Variants = "lang-select";
 
-	interface Props extends HTMLSelectAttributes {
+	export interface Props extends HTMLSelectAttributes {
 		children: Snippet;
 		value: string;
 		variant?: Variants;

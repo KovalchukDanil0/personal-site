@@ -1,2 +1,1 @@
-export { default as Button } from "./Button.svelte";
-export type { Props } from "./types";
+export { default as Button, type Props as ButtonProps } from "./Button.svelte";

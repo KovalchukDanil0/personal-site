@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { getLocale, locales, setLocale, type Locale } from "$lib/paraglide/runtime";
-	import type { HTMLSelectAttributes } from "svelte/elements";
-	import { Option, Select } from "..";
+	import { Select, type SelectProps } from ".";
+	import { Option } from "..";
 
-	let props: HTMLSelectAttributes = $props();
+	let props: Omit<SelectProps, "children" | "value"> = $props();
 
 	const localeNames: Record<Locale, string> = {
 		en: "🇺🇸",
@@ -17,6 +17,7 @@
 	{...props}
 	name="locale"
 	variant="lang-select"
+	value={currentLocale}
 	onchange={async ({ currentTarget: { value } }) => {
 		const locale = value as Locale;
 

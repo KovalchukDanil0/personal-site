@@ -1,16 +1,20 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import { Link, MetaTags } from "$lib/components";
-	import { Vml } from "$lib/components/icons";
-	import { email, github, linkedIn, myName } from "$lib/info";
+	import { Link, MetaTags, Ticker, Tooltip, WorkExperienceCard } from "$lib/components";
+	import { email, github, linkedIn } from "$lib/info";
 </script>
 
 <MetaTags title="Hello" description="Home Page description" />
 
 <section>
-	<h1>Hey, I am <span class="accent">{myName}</span>!</h1>
-	<p>Full-Stack Web Developer based in Czech Republic, Prague</p>
-	<q><i>Being a fullstack dev is being equally bad at backend and frontend</i></q>
+	<h1 class="header">Hey, I am <Ticker content={["Danylo", "Dan", "Daniel", "Danil"]} /> !</h1>
+
+	<div>
+		<Tooltip text="Being a fullstack dev is being equally bad at backend and frontend"
+			>Full-Stack Web Developer</Tooltip
+		>, based in Czech Republic, Prague
+	</div>
+
 	<div class="buttons">
 		<Link href={resolve("/about")} variant="button">About me</Link>
 		<Link href={resolve("/blog")} variant="button">Read the blog</Link>
@@ -31,9 +35,19 @@
 </section>
 
 <section>
-	<h2>Work Experience</h2>
-	<Vml width="30%" height="10%" />
-	<p>MDU</p>
+	<WorkExperienceCard
+		company="VML"
+		location="Bubenská 1477/1, Praha 7"
+		position="Content Editor"
+		period="July 2022 - Present"
+		website="vml.com/czech-republic"
+	>
+		Created a Chrome Extension <Link
+			href="https://github.com/KovalchukDanil0/AEMFixes"
+			underline
+			newTab>github.com/KovalchukDanil0/AEMFixes</Link
+		> to increase productivity of team by 50% by automating repetitive work
+	</WorkExperienceCard>
 </section>
 
 <section>
@@ -43,15 +57,12 @@
 	<p>Rust</p>
 </section>
 
-<section>
-	<h2>Recent Writings</h2>
-</section>
-
-<section>
-	<h2>Photography</h2>
-</section>
-
 <style lang="scss">
+	.header {
+		display: inline-flex;
+		white-space: pre;
+	}
+
 	section {
 		display: flex;
 		flex-direction: column;
@@ -67,11 +78,7 @@
 		> .buttons {
 			display: flex;
 			flex-direction: row;
-			gap: 0.25rem;
+			gap: 1ch;
 		}
-	}
-
-	.accent {
-		color: var(--primary-color);
 	}
 </style>

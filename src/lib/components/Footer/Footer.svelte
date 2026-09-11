@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { birthYear, myName } from "$lib/info";
+	import { birthYear, siteName } from "$lib/info";
 	import type { HTMLAttributes } from "svelte/elements";
+	import { slide } from "svelte/transition";
 
-	interface Props extends HTMLAttributes<EventTarget> {
+	interface Props extends Omit<HTMLAttributes<EventTarget>, "children"> {
 		currentYear: number;
 	}
 
@@ -30,14 +31,12 @@
 	}}
 >
 	<p>
-		© {birthYear}{#if currentYear > birthYear}
-			-{currentYear}
-		{/if}
-		{myName}
+		© {birthYear}
+		{siteName}
 	</p>
 
 	{#if showStatus}
-		<p class="status">
+		<p class="status" transition:slide>
 			{#if currentYear - birthYear < 100}
 				This is not my actual birth-death range ;)
 			{:else}

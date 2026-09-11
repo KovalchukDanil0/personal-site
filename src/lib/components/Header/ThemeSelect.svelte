@@ -4,7 +4,7 @@
 	import type { HTMLButtonAttributes } from "svelte/elements";
 	import { Button } from "..";
 
-	interface Props extends HTMLButtonAttributes {
+	interface Props extends Omit<HTMLButtonAttributes, "children"> {
 		theme?: Theme;
 	}
 
@@ -14,10 +14,9 @@
 <Button
 	variant="theme-select"
 	onclick={() => {
-		const newTheme: Theme = theme === "dark" ? "light" : "dark";
-
-		theme = newTheme;
-		setThemeCookie(newTheme);
+		const NEW_THEME: Theme = theme === "dark" ? "light" : "dark";
+		theme = NEW_THEME;
+		setThemeCookie(NEW_THEME);
 	}}
 	{...restProps}
 >

@@ -1,17 +1,15 @@
 <script lang="ts">
+	import { onNavigate } from "$app/navigation";
 	import { page } from "$app/state";
 	import favicon from "$lib/assets/favicon.svg";
-	import { Header, Link, MetaTags } from "$lib/components";
-	import { myName } from "$lib/info";
+	import { Footer, Header, Link, MetaTags } from "$lib/components";
+	import { siteName } from "$lib/info";
 	import "$lib/styles/_index.scss";
-	import { setThemeCookie } from "$lib/themes";
 	import { parentRoute } from "$lib/utils";
 	import { posthog } from "posthog-js";
 	import { onMount } from "svelte";
-	import { MediaQuery } from "svelte/reactivity";
-	import type { LayoutProps } from "./$types";
 
-	let { children, data }: LayoutProps = $props();
+	let { children, data } = $props();
 	let { currentYear, theme } = $derived(data);
 
 	posthog.init("TOKEN", {
@@ -25,13 +23,21 @@
 	let title = $state<string>();
 
 	onMount(() => {
-		if (!theme) {
-			const userThemeDark = new MediaQuery("prefers-color-scheme: dark").current;
-			theme = setThemeCookie(userThemeDark ? "dark" : "light");
+		initTitle = document.title.replace(new RegExp(`\\s+-\\s+${siteName}`, "u"), "");
+		console.log(initTitle);
+	});
+
+	onNavigate(({ complete }) => {
+		if (!document.startViewTransition) {
+			return;
 		}
 
-		initTitle = document.title.replace(new RegExp(`\\s+-\\s+${myName}`), "");
-		console.log(initTitle);
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await complete;
+			});
+		});
 	});
 </script>
 
@@ -63,8 +69,9 @@
 			</Link>
 		{/if}
 
-		<!-- eslint-disable-next-line @typescript-eslint/no-unsafe-call -->
 		{@render children()}
+
+		<Footer {currentYear} />
 	</main>
 </div>
 
@@ -92,6 +99,44 @@
 		@media screen and (width >= 900px) {
 			margin-left: var(--aside-width);
 			padding-left: 1rem;
+		}
+	}
+
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+	}
+
+	@keyframes fade-out {
+		to {
+			opacity: 0;
+		}
+	}
+
+	@keyframes slide-from-right {
+		from {
+			transform: translateX(30px);
+		}
+	}
+
+	@keyframes slide-to-left {
+		to {
+			transform: translateX(-30px);
+		}
+	}
+
+	:root {
+		&::view-transition-old(root) {
+			animation:
+				90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+				300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+		}
+
+		&::view-transition-new(root) {
+			animation:
+				210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+				300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
 		}
 	}
 </style>

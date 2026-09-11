@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { asset } from "$app/paths";
+	import { asset, resolve } from "$app/paths";
 	import { MetaTags } from "$lib/components";
 </script>
 
@@ -9,19 +9,17 @@
 
 <embed src={asset("/resume.pdf")} type="application/pdf" />
 
-<img
-	class="will-work-for-beer"
-	src={asset("/will-work-for-beer-jon-neidert.jpg")}
-	alt="Will Work for Beer"
-/>
+<iframe
+	title="Resume"
+	src={resolve("/resume/pdf")}
+	width="100%"
+	height="800"
+	style="border:1px solid #ccc"
+></iframe>
 
 <style lang="scss">
 	embed {
 		width: 100%;
 		min-height: 90vh;
-	}
-
-	.will-work-for-beer {
-		z-index: -10;
 	}
 </style>
