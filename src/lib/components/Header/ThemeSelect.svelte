@@ -1,14 +1,15 @@
 <script lang="ts">
 	import { setThemeCookie, type Theme } from "$lib/themes";
 	import { Moon, Sun } from "@lucide/svelte";
+	import { getContext } from "svelte";
 	import type { HTMLButtonAttributes } from "svelte/elements";
 	import { Button } from "..";
 
-	interface Props extends Omit<HTMLButtonAttributes, "children"> {
-		theme?: Theme;
-	}
+	type Props = Omit<HTMLButtonAttributes, "children">;
 
-	let { theme, ...restProps }: Props = $props();
+	let props: Props = $props();
+
+	let theme = $state<string>(getContext("theme"));
 </script>
 
 <Button
@@ -18,7 +19,7 @@
 		theme = NEW_THEME;
 		setThemeCookie(NEW_THEME);
 	}}
-	{...restProps}
+	{...props}
 >
 	{#if theme === "dark"}
 		<Moon />

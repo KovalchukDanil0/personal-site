@@ -3,14 +3,22 @@
 	import { page } from "$app/state";
 	import favicon from "$lib/assets/favicon.svg";
 	import { Footer, Header, Link, MetaTags } from "$lib/components";
+	import Navigation from "$lib/components/Header/Navigation.svelte";
+	import { onDrag } from "$lib/dragMe.js";
 	import { siteName } from "$lib/info";
 	import "$lib/styles/_index.scss";
 	import { parentRoute } from "$lib/utils";
 	import { posthog } from "posthog-js";
-	import { onMount } from "svelte";
+	import { onMount, setContext } from "svelte";
+	import { MediaQuery } from "svelte/reactivity";
+
+	const largeScreen = new MediaQuery("min-width: 800px");
 
 	let { children, data } = $props();
 	let { currentYear, theme } = $derived(data);
+
+	setContext("currentYear", currentYear);
+	setContext("theme", theme);
 
 	posthog.init("TOKEN", {
 		api_host: "https://us.i.posthog.com",
@@ -21,6 +29,9 @@
 
 	let initTitle = $state<string>();
 	let title = $state<string>();
+
+	let initialWidth = 256;
+	let resizeWidth = $state(initialWidth);
 
 	onMount(() => {
 		initTitle = document.title.replace(new RegExp(`\\s+-\\s+${siteName}`, "u"), "");
@@ -56,8 +67,24 @@
 
 <MetaTags {title} />
 
-<div class="content">
-	<Header {theme} {currentYear} />
+<div class="content" style:grid-template-columns="{resizeWidth}px 1fr">
+	<Header />
+	<Navigation />
+
+	{#if largeScreen.current}
+		<div
+			class="separator"
+			role="separator"
+			aria-orientation="vertical"
+			use:onDrag={{ orientation: "vertical" }}
+			ondrag={({ detail: delta }) => {
+				resizeWidth = initialWidth + delta;
+			}}
+			ondragend={() => {
+				initialWidth = resizeWidth;
+			}}
+		></div>
+	{/if}
 
 	<main>
 		{#if parentUrl}
@@ -70,21 +97,28 @@
 		{/if}
 
 		{@render children()}
-
-		<Footer {currentYear} />
 	</main>
+
+	<Footer />
 </div>
 
 <style lang="scss">
 	.content {
-		display: flex;
-		flex-direction: row;
-		flex-grow: 1;
-		align-items: start;
-		justify-content: center;
+		height: 100%;
+		display: grid;
 
-		@media screen and (width < 900px) {
-			flex-direction: column;
+		grid-template:
+			"header div main" auto
+			"nav    div main" 1fr
+			"footer div main" auto;
+
+		@media screen and (width < 800px) {
+			grid-template:
+				"header header" auto
+				"nav    nav" auto
+				"main   main" 1fr
+				"footer footer" auto
+				/ 1fr;
 		}
 	}
 
@@ -94,11 +128,19 @@
 		align-items: start;
 		gap: 0.5rem;
 		z-index: 50;
-		overflow-y: hidden;
 
-		@media screen and (width >= 900px) {
-			margin-left: var(--aside-width);
-			padding-left: 1rem;
+		grid-area: main;
+	}
+
+	.separator {
+		grid-area: div;
+		background-color: gray;
+		cursor: col-resize;
+		width: 4px;
+		height: 100%;
+
+		@media screen and (width < 800px) {
+			display: none;
 		}
 	}
 

@@ -36,6 +36,7 @@
 	a {
 		cursor: pointer;
 		text-decoration: none;
+		width: fit-content;
 
 		&:hover {
 			color: gray;

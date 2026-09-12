@@ -1,20 +1,21 @@
 <script lang="ts">
 	import { birthYear, siteName } from "$lib/info";
+	import { getContext } from "svelte";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { slide } from "svelte/transition";
 
-	interface Props extends Omit<HTMLAttributes<EventTarget>, "children"> {
-		currentYear: number;
-	}
+	type Props = Omit<HTMLAttributes<EventTarget>, "children">;
 
-	let { currentYear, ...restProps }: Props = $props();
+	let props: Props = $props();
+
+	const currentYear = getContext<number>("currentYear");
 
 	let showStatus = $state(false);
 	let statusTimeout: NodeJS.Timeout | null = null;
 </script>
 
 <footer
-	{...restProps}
+	{...props}
 	onmouseover={() => {
 		if (!statusTimeout) {
 			statusTimeout = setTimeout(() => {
@@ -48,6 +49,7 @@
 
 <style lang="scss">
 	footer {
+		grid-area: footer;
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;

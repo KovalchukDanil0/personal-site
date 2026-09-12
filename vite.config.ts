@@ -1,13 +1,14 @@
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { playwright } from "@vitest/browser-playwright";
+import browserslist from "browserslist";
+import { browserslistToTargets } from "lightningcss";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import { defineConfig } from "vitest/config";
 
 const CLIENT_TESTS = ["src/**/*.svelte.test.ts"];
 
 export default defineConfig({
-	build: { minify: true },
 	plugins: [
 		sveltekit(),
 		ViteImageOptimizer(),
@@ -34,6 +35,14 @@ export default defineConfig({
 			],
 		}),
 	],
+
+	build: { minify: true, cssMinify: "lightningcss" },
+	css: {
+		transformer: "lightningcss",
+		lightningcss: {
+			targets: browserslistToTargets(browserslist(">= 0.25%")),
+		},
+	},
 	resolve: process.env.VITEST ? { conditions: ["browser"] } : undefined,
 
 	test: {
