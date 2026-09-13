@@ -17,6 +17,8 @@
 </nav>
 
 <style lang="scss">
+	@use "$styles/mixins" as c;
+
 	nav {
 		grid-area: nav;
 		display: flex;
@@ -24,8 +26,9 @@
 		align-items: start;
 		justify-content: start;
 		gap: 0.5rem;
+		margin: 16px 0;
 
-		@media screen and (width < 800px) {
+		@include c.screen-small {
 			flex-direction: row;
 			justify-content: space-around;
 		}

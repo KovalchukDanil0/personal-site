@@ -1,12 +1,15 @@
-export { Button, type ButtonProps } from "./Button";
+export { default as Badge } from "./Badge.svelte";
+export { Button, ThemeSelect, type ButtonProps } from "./Button";
 export { Footer } from "./Footer";
 export { Header } from "./Header";
 export { default as Link } from "./Link.svelte";
 export { Map } from "./Map";
 export { default as MetaTags } from "./MetaTags.svelte";
+export { Navigation } from "./Navigation";
 export { default as Option } from "./Option.svelte";
 export { LangSelect, Select, type SelectProps } from "./Select";
+export { default as Separator } from "./Separator.svelte";
 export { default as Summary } from "./Summary.svelte";
 export { default as Ticker } from "./Ticker.svelte";
 export { default as Tooltip } from "./Tooltip.svelte";
-export { default as WorkExperienceCard } from "./WorkExperienceCard.svelte";
+export { default as WorkExperienceCard } from "./WorkExperienceCard";

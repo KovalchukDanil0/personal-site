@@ -5,10 +5,10 @@ import type { Component } from "svelte";
 const posts = import.meta.glob<{
 	default: Component;
 	metadata: App.BlogMetadataType;
-}>("$lib/posts/*.md");
+}>("$posts/*.md");
 
 export async function load({ params: { blog } }) {
-	const loader = posts[`/src/lib/posts/${blog}.md`];
+	const loader = posts[`/src/posts/${blog}.md`];
 	if (!loader) {
 		error(404, m["error.blogNotFound"]({ blog }));
 	}

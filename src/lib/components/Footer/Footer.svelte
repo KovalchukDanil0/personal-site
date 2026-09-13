@@ -1,14 +1,15 @@
 <script lang="ts">
+	import { getCurrentYear } from "$lib/context";
 	import { birthYear, siteName } from "$lib/info";
-	import { getContext } from "svelte";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { slide } from "svelte/transition";
+	import { Badge } from "..";
 
 	type Props = Omit<HTMLAttributes<EventTarget>, "children">;
 
 	let props: Props = $props();
 
-	const currentYear = getContext<number>("currentYear");
+	const currentYear = getCurrentYear();
 
 	let showStatus = $state(false);
 	let statusTimeout: NodeJS.Timeout | null = null;
@@ -38,13 +39,18 @@
 
 	{#if showStatus}
 		<p class="status" transition:slide>
-			{#if currentYear - birthYear < 100}
+			{#if currentYear() - birthYear < 100}
 				This is not my actual birth-death range ;)
 			{:else}
 				Well I may be dead... Whatever
 			{/if}
 		</p>
 	{/if}
+
+	<Badge
+		src="https://notbyai.fyi/img/written-by-human-not-by-ai-white.svg"
+		alt="Written by humans, not by AI"
+	/>
 </footer>
 
 <style lang="scss">

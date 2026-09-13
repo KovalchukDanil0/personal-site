@@ -1,0 +1,13 @@
+@use "variables" as v;
+
+@mixin screen-small() {
+	@media screen and (width < v.$screen-small) {
+		@content;
+	}
+}
+
+@mixin screen-large() {
+	@media screen and (width >= v.$screen-small) {
+		@content;
+	}
+}

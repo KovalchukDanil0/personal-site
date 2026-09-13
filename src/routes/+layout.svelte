@@ -1,37 +1,28 @@
 <script lang="ts">
-	import { onNavigate } from "$app/navigation";
-	import { page } from "$app/state";
-	import favicon from "$lib/assets/favicon.svg";
-	import { Footer, Header, Link, MetaTags } from "$lib/components";
-	import Navigation from "$lib/components/Header/Navigation.svelte";
-	import { onDrag } from "$lib/dragMe.js";
-	import { siteName } from "$lib/info";
-	import "$lib/styles/_index.scss";
-	import { parentRoute } from "$lib/utils";
-	import { posthog } from "posthog-js";
-	import { onMount, setContext } from "svelte";
-	import { MediaQuery } from "svelte/reactivity";
+	// Make achievements system
+	// Make the public chat
 
-	const largeScreen = new MediaQuery("min-width: 800px");
+	import { onNavigate } from "$app/navigation";
+	import { Footer, Header, MetaTags, Navigation, Separator } from "$lib/components";
+	import { setCurrentYear, setTheme } from "$lib/context";
+	import { siteName } from "$lib/info";
+	import "$styles/_index.scss";
+	import { posthog } from "posthog-js";
+	import { onMount } from "svelte";
 
 	let { children, data } = $props();
-	let { currentYear, theme } = $derived(data);
+	let { currentYear, theme, scrollWidth } = $derived(data);
 
-	setContext("currentYear", currentYear);
-	setContext("theme", theme);
+	setCurrentYear(() => currentYear);
+	setTheme(() => theme);
 
 	posthog.init("TOKEN", {
 		api_host: "https://us.i.posthog.com",
 		defaults: "2025-11-30",
 	});
 
-	const parentUrl = $derived(parentRoute(page.url.pathname));
-
 	let initTitle = $state<string>();
 	let title = $state<string>();
-
-	let initialWidth = 256;
-	let resizeWidth = $state(initialWidth);
 
 	onMount(() => {
 		initTitle = document.title.replace(new RegExp(`\\s+-\\s+${siteName}`, "u"), "");
@@ -52,10 +43,6 @@
 	});
 </script>
 
-<svelte:head>
-	<link rel="icon" href={favicon} />
-</svelte:head>
-
 <svelte:window
 	onblur={() => {
 		title = "Come back again";
@@ -67,35 +54,13 @@
 
 <MetaTags {title} />
 
-<div class="content" style:grid-template-columns="{resizeWidth}px 1fr">
+<div class="content" style:grid-template-columns="{scrollWidth}px 16px 1fr">
 	<Header />
 	<Navigation />
 
-	{#if largeScreen.current}
-		<div
-			class="separator"
-			role="separator"
-			aria-orientation="vertical"
-			use:onDrag={{ orientation: "vertical" }}
-			ondrag={({ detail: delta }) => {
-				resizeWidth = initialWidth + delta;
-			}}
-			ondragend={() => {
-				initialWidth = resizeWidth;
-			}}
-		></div>
-	{/if}
+	<Separator bind:width={scrollWidth} />
 
 	<main>
-		{#if parentUrl}
-			<Link variant="link-back" href={parentUrl.url}>
-				Back
-				{#if parentUrl.name}
-					to {parentUrl.name}
-				{/if}
-			</Link>
-		{/if}
-
 		{@render children()}
 	</main>
 
@@ -103,6 +68,8 @@
 </div>
 
 <style lang="scss">
+	@use "$styles/mixins" as c;
+
 	.content {
 		height: 100%;
 		display: grid;
@@ -112,7 +79,7 @@
 			"nav    div main" 1fr
 			"footer div main" auto;
 
-		@media screen and (width < 800px) {
+		@include c.screen-small {
 			grid-template:
 				"header header" auto
 				"nav    nav" auto
@@ -130,18 +97,6 @@
 		z-index: 50;
 
 		grid-area: main;
-	}
-
-	.separator {
-		grid-area: div;
-		background-color: gray;
-		cursor: col-resize;
-		width: 4px;
-		height: 100%;
-
-		@media screen and (width < 800px) {
-			display: none;
-		}
 	}
 
 	@keyframes fade-in {

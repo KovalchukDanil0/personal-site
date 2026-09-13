@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { HTMLAttributes } from "svelte/elements";
-	import { ThemeSelect } from ".";
-	import { LangSelect } from "..";
+	import { LangSelect, ThemeSelect } from "..";
 
 	type Props = Omit<HTMLAttributes<EventTarget>, "children">;
 
@@ -17,8 +16,9 @@
 	.toggles {
 		display: flex;
 		flex-direction: row;
-		align-items: center;
-		justify-content: center;
+		flex-grow: 1;
+		align-items: end;
+		justify-content: end;
 		gap: 0.5rem;
 	}
 </style>

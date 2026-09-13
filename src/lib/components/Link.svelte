@@ -3,7 +3,7 @@
 	import type { Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
-	type Variants = "link-back" | "button";
+	type Variants = "button";
 
 	interface Props extends Omit<HTMLAnchorAttributes, "target"> {
 		children: Snippet;
@@ -44,10 +44,6 @@
 
 		&.underline {
 			text-decoration: underline;
-		}
-
-		&.link-back {
-			margin-bottom: 0.5rem;
 		}
 
 		&.button {
