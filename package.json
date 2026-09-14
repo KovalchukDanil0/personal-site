@@ -5,14 +5,16 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
+		"preview": "npm run build && wrangler dev",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "oxlint",
 		"lint:fix": "oxlint --fix",
 		"format": "prettier --write .",
-		"test": "npx vitest"
+		"test": "npx vitest",
+		"deploy": "bun run build && wrangler deploy",
+		"cf-typegen": "wrangler types ./src/worker-configuration.d.ts"
 	},
 	"devDependencies": {
 		"@fontsource/open-sans": "^5.3.0",
@@ -21,6 +23,7 @@
 		"@inlang/plugin-message-format": "^4.4.4",
 		"@lucide/svelte": "^1.45.0",
 		"@sveltejs/adapter-auto": "^7.0.1",
+		"@sveltejs/adapter-cloudflare": "^7.2.9",
 		"@sveltejs/adapter-node": "^5.5.7",
 		"@sveltejs/kit": "^2.70.3",
 		"@sveltejs/vite-plugin-svelte": "^7.3.0",
@@ -61,7 +64,8 @@
 		"vite": "^8.3.0",
 		"vite-plugin-image-optimizer": "^2.0.3",
 		"vitest": "^5.0.0",
-		"vitest-browser-svelte": "^3.1.0"
+		"vitest-browser-svelte": "^3.1.0",
+		"wrangler": "^4.131.2"
 	},
 	"trustedDependencies": [
 		"@parcel/watcher",
