@@ -37,7 +37,7 @@
 	.separator {
 		grid-area: div;
 		background: gray;
-		width: 4px;
+		width: 3px;
 		cursor: col-resize;
 		touch-action: none;
 		user-select: none;

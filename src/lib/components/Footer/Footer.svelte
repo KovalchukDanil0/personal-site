@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getCurrentYear } from "$lib/context";
+	import { getCurrentYear, getTheme } from "$lib/context";
 	import { birthYear, siteName } from "$lib/info";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { slide } from "svelte/transition";
@@ -13,6 +13,9 @@
 
 	let showStatus = $state(false);
 	let statusTimeout: NodeJS.Timeout | null = null;
+
+	let theme = getTheme();
+	let themeDark = theme() === "dark";
 </script>
 
 <footer
@@ -49,7 +52,14 @@
 
 	<Badge
 		src="https://notbyai.fyi/img/written-by-human-not-by-ai-white.svg"
+		href="https://notbyai.fyi"
 		alt="Written by humans, not by AI"
+	/>
+
+	<Badge
+		src="https://storage.ko-fi.com/cdn/kofi{themeDark ? '1' : '6'}.png?v=1"
+		href="https://ko-fi.com/T8M627428N"
+		alt="Buy me a coffee"
 	/>
 </footer>
 

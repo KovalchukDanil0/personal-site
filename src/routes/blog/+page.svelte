@@ -1,24 +1,25 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
 	import { Link, MetaTags, Summary } from "$lib/components";
+	import type { Test } from "./index";
 
-	let { data } = $props();
-	let { postsWithYear } = $derived(data);
+	let { data }: { data: { blogsSorted: Test } } = $props();
+	let { blogsSorted } = $derived(data);
 </script>
 
 <MetaTags title="Blog overview" description="Blog overview description" />
 
 <div class="posts-overview">
-	{#each Object.entries(postsWithYear) as [year, posts] (year)}
+	{#each Object.entries(blogsSorted) as [year, blogs]}
 		<details open>
 			<Summary>
 				{year}
 			</Summary>
 			<div class="posts">
-				{#each posts as { metadata: { title, date }, blog } (blog)}
+				{#each blogs as { title, created_at, slug, id } (id)}
 					<h2>{title}</h2>
-					<p>{date}</p>
-					<Link href={resolve("/blog/[blog]", { blog })}>See more</Link>
+					<p>{created_at}</p>
+					<Link href={resolve("/blog/[blog]", { blog: slug })}>See more</Link>
 				{/each}
 			</div>
 		</details>

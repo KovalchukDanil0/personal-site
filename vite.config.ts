@@ -36,7 +36,10 @@ export default defineConfig({
 		}),
 	],
 
-	build: { minify: true, cssMinify: "lightningcss" },
+	build: {
+		minify: "oxc",
+		cssMinify: "lightningcss",
+	},
 	css: {
 		transformer: "lightningcss",
 		lightningcss: {

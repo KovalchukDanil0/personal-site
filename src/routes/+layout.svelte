@@ -26,7 +26,6 @@
 
 	onMount(() => {
 		initTitle = document.title.replace(new RegExp(`\\s+-\\s+${siteName}`, "u"), "");
-		console.log(initTitle);
 	});
 
 	onNavigate(({ complete }) => {

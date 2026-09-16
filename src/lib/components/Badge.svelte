@@ -1,12 +1,26 @@
 <script lang="ts">
 	import type { HTMLImgAttributes } from "svelte/elements";
+	import { Link, type LinkProps } from ".";
 
-	type Props = HTMLImgAttributes;
+	interface Props extends Omit<HTMLImgAttributes, "children">, Omit<LinkProps, "newTab"> {
+		src: string;
+		href?: string;
+	}
 
-	let props: Props = $props();
+	let { href, ...restProps }: Props = $props();
 </script>
 
-<img {...props} class="badge" />
+{#snippet image()}
+	<img {...restProps} class="badge" />
+{/snippet}
+
+{#if href}
+	<Link {href} newTab>
+		{@render image()}
+	</Link>
+{:else}
+	{@render image()}
+{/if}
 
 <style lang="scss">
 	.badge {

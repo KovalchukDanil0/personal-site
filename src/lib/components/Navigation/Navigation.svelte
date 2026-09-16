@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
+	import { page } from "$app/state";
+	import { localizeHref } from "$lib/paraglide/runtime";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { Toggles } from ".";
 	import { Link } from "..";
@@ -7,11 +9,18 @@
 	type Props = Omit<HTMLAttributes<EventTarget>, "children">;
 
 	let props: Props = $props();
+
+	const links: { href: string; text: string }[] = [
+		{ href: localizeHref(resolve("/blog")), text: "Blog" },
+		{ href: localizeHref(resolve("/resume")), text: "Resume" },
+		{ href: localizeHref(resolve("/about")), text: "About" },
+	];
 </script>
 
 <nav {...props}>
-	<Link href={resolve("/blog")}>Blog</Link>
-	<Link href={resolve("/resume")}>Resume</Link>
+	{#each links.filter(({ href }) => href !== page.url.pathname) as { href, text }}
+		<Link {href}>{text}</Link>
+	{/each}
 
 	<Toggles />
 </nav>

@@ -1,8 +1,13 @@
-import { postsGlob, type BlogItem } from ".";
+import { supabase } from "$lib/supabase";
+import type { Tables } from "$lib/supabase/database.types";
+import type { Test } from ".";
 
-function postsByYear(posts: BlogItem[]): Record<string, BlogItem[]> {
-	return posts.reduce<Record<string, BlogItem[]>>((acc, blog) => {
-		const year = blog.metadata.date.getFullYear().toString();
+function sortBlogsByYear(blogs: Tables<"blogs">[]) {
+	return blogs.reduce<Test>((acc, blog) => {
+		const date = new Date(blog.created_at);
+
+		const year = date.getFullYear().toString();
+		blog.created_at = date.toLocaleDateString();
 
 		if (!acc[year]) {
 			acc[year] = [];
@@ -14,15 +19,13 @@ function postsByYear(posts: BlogItem[]): Record<string, BlogItem[]> {
 	}, {});
 }
 
-export function load() {
-	const posts = Object.entries(postsGlob)
-		.map(([path, { metadata }]) => ({
-			blog: path.split("/").pop()?.replace(".md", ""),
-			metadata: { ...metadata, date: new Date(metadata.date) },
-		}))
-		.filter((post): post is BlogItem => Boolean(post.blog));
+export async function load() {
+	const { data: blogs } = await supabase
+		.from("blogs")
+		.select()
+		.order("created_at", { ascending: false });
 
 	return {
-		postsWithYear: postsByYear(posts),
+		blogsSorted: sortBlogsByYear(blogs),
 	};
 }

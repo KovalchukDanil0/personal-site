@@ -3,14 +3,16 @@
 	import type { Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
-	type Variants = "button";
+	type Variants = "button" | "nav";
 
-	interface Props extends Omit<HTMLAnchorAttributes, "target"> {
-		children: Snippet;
-		href: string;
+	export interface LinkProps {
 		newTab?: boolean;
 		underline?: boolean;
 		variant?: Variants;
+	}
+
+	interface Props extends Omit<HTMLAnchorAttributes, "target">, LinkProps {
+		children: Snippet;
 	}
 
 	let {
