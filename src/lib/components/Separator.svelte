@@ -33,7 +33,9 @@
 	}}
 ></div>
 
-<style>
+<style lang="scss">
+	@use "$styles/mixins" as c;
+
 	.separator {
 		grid-area: div;
 		background: gray;
@@ -41,5 +43,9 @@
 		cursor: col-resize;
 		touch-action: none;
 		user-select: none;
+
+		@include c.screen-small {
+			display: none;
+		}
 	}
 </style>

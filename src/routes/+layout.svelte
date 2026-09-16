@@ -84,7 +84,7 @@
 				"nav    nav" auto
 				"main   main" 1fr
 				"footer footer" auto
-				/ 1fr;
+				/ 1fr !important;
 		}
 	}
 
