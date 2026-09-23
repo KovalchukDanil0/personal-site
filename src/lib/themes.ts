@@ -12,6 +12,6 @@ export function setThemeCookie(theme: Theme): Theme {
 		sameSite: "lax",
 	});
 
-	document.documentElement.dataset.theme = theme;
+	document.documentElement.dataset["theme"] = theme;
 	return theme;
 }

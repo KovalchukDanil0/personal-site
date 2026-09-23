@@ -49,18 +49,6 @@
 			> to increase productivity of team by 50% by automating repetitive work</WorkExperienceCard.Role
 		>
 
-		<WorkExperienceCard.Role position="Tagging Specialist" period="2022 - 2025">
-			<ul>
-				<li>
-					Created chrome extension that increased peformance of each team member by 200%, by
-					automating dev-prod environment switching. Additionally added some userful tools such as
-					brocken links checker and server data visualisation
-				</li>
-				<li>Launched new vehicle on all EMEA markets websites in tight deadlines</li>
-				<li>Led medium-sized learning meetings for newcomers</li>
-			</ul>
-		</WorkExperienceCard.Role>
-
 		<WorkExperienceCard.Role position="Tagging Specialist" period="2026 - Present">
 			<ul>
 				<li>
@@ -96,10 +84,6 @@
 		align-items: start;
 		justify-content: space-evenly;
 		width: 100%;
-
-		:global(> div) {
-			margin-right: 100px;
-		}
 
 		:global(> p) {
 			margin: 0;

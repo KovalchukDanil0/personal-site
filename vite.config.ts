@@ -33,6 +33,7 @@ export default defineConfig({
 					],
 				},
 			],
+			emitTsDeclarations: true,
 		}),
 	],
 
@@ -46,7 +47,7 @@ export default defineConfig({
 			targets: browserslistToTargets(browserslist(">= 0.25%")),
 		},
 	},
-	resolve: process.env.VITEST ? { conditions: ["browser"] } : undefined,
+	resolve: process.env["VITEST"] ? { conditions: ["browser"] } : undefined,
 
 	test: {
 		expect: { requireAssertions: true },

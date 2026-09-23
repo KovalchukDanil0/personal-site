@@ -3,11 +3,10 @@
 	// Make the public chat
 
 	import { onNavigate } from "$app/navigation";
-	import { Footer, Header, MetaTags, Navigation, Separator } from "$lib/components";
+	import { Footer, MetaTags, Navigation, Separator } from "$lib/components";
 	import { setCurrentYear, setTheme } from "$lib/context";
 	import { siteName } from "$lib/info";
 	import "$styles/_index.scss";
-	import { posthog } from "posthog-js";
 	import { onMount } from "svelte";
 
 	let { children, data } = $props();
@@ -15,11 +14,6 @@
 
 	setCurrentYear(() => currentYear);
 	setTheme(() => theme);
-
-	posthog.init("TOKEN", {
-		api_host: "https://us.i.posthog.com",
-		defaults: "2025-11-30",
-	});
 
 	let initTitle = $state<string>();
 	let title = $state<string>();
@@ -54,7 +48,6 @@
 <MetaTags {title} />
 
 <div class="content" style:grid-template-columns="{scrollWidth}px 16px 1fr">
-	<Header />
 	<Navigation />
 
 	<Separator bind:width={scrollWidth} />
@@ -74,13 +67,12 @@
 		display: grid;
 
 		grid-template:
-			"header div main" auto
+			"nav    div main" auto
 			"nav    div main" 1fr
 			"footer div main" auto;
 
 		@include c.screen-small {
 			grid-template:
-				"header header" auto
 				"nav    nav" auto
 				"main   main" 1fr
 				"footer footer" auto
@@ -93,6 +85,7 @@
 		flex-direction: column;
 		align-items: start;
 		gap: 0.5rem;
+		padding: 0 10px;
 		z-index: 50;
 
 		grid-area: main;

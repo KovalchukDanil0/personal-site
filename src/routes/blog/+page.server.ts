@@ -1,5 +1,6 @@
 import { supabase } from "$lib/supabase";
 import type { Tables } from "$lib/supabase/database.types";
+import { error } from "@sveltejs/kit";
 import type { Test } from ".";
 
 function sortBlogsByYear(blogs: Tables<"blogs">[]) {
@@ -24,6 +25,9 @@ export async function load() {
 		.from("blogs")
 		.select()
 		.order("created_at", { ascending: false });
+	if (!blogs) {
+		error(500, "");
+	}
 
 	return {
 		blogsSorted: sortBlogsByYear(blogs),

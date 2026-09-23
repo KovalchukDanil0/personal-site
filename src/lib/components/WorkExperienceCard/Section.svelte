@@ -2,7 +2,7 @@
 	import type { HTMLAttributes } from "svelte/elements";
 
 	interface Props extends HTMLAttributes<EventTarget> {
-		contents: string[];
+		contents: (string | undefined)[];
 		withHeader?: boolean;
 	}
 
@@ -11,12 +11,16 @@
 	let [header, ...restContent] = $derived(contents);
 </script>
 
-<div class="experience-card-section" {...restProps}>
-	<svelte:element this={withHeader ? "h3" : "p"} class="title">{header}</svelte:element>
-	{#each restContent as content}
-		<p>{content}</p>
-	{/each}
-</div>
+{#if contents.length > 0}
+	<div class="experience-card-section" {...restProps}>
+		<svelte:element this={withHeader ? "h3" : "p"} class="title">{header}</svelte:element>
+		{#each restContent as content}
+			{#if content}
+				<p>{content}</p>
+			{/if}
+		{/each}
+	</div>
+{/if}
 
 <style lang="scss">
 	.experience-card-section {

@@ -1,10 +1,17 @@
 <script lang="ts">
-	import { MetaTags } from "$lib/components";
+	import { resolve } from "$app/paths";
+	import { Link, MetaTags } from "$lib/components";
 	import type { Tables } from "$lib/supabase/database.types";
 
-	let { data }: { data: { blog: Tables<"blogs"> } } = $props();
+	interface Props {
+		data: { blog: Tables<"blogs"> };
+	}
+
+	let { data }: Props = $props();
 	let { title, description, created_at, content } = $derived(data.blog);
 </script>
+
+<Link href={resolve("/blog")}>Back</Link>
 
 <MetaTags {title} {description} />
 

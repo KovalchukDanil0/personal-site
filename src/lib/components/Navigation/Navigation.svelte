@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
 	import { page } from "$app/state";
+	import { m } from "$lib/paraglide/messages";
 	import { localizeHref } from "$lib/paraglide/runtime";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { Toggles } from ".";
@@ -10,16 +11,21 @@
 
 	let props: Props = $props();
 
-	const links: { href: string; text: string }[] = [
+	interface LinksType {
+		href: string;
+		text: string;
+	}
+
+	const links: LinksType[] = [
+		{ href: resolve("/"), text: m["navigation.title"]() },
 		{ href: localizeHref(resolve("/blog")), text: "Blog" },
-		{ href: localizeHref(resolve("/resume")), text: "Resume" },
 		{ href: localizeHref(resolve("/about")), text: "About" },
 	];
 </script>
 
 <nav {...props}>
-	{#each links.filter(({ href }) => href !== page.url.pathname) as { href, text }}
-		<Link {href}>{text}</Link>
+	{#each links as { href, text }}
+		<Link {href} variant={href === page.url.pathname && "active"}>{text}</Link>
 	{/each}
 
 	<Toggles />

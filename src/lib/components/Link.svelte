@@ -3,12 +3,12 @@
 	import type { Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
-	type Variants = "button" | "nav";
+	type Variants = "button" | "nav" | "active";
 
 	export interface LinkProps {
 		newTab?: boolean;
 		underline?: boolean;
-		variant?: Variants;
+		variant?: Variants | false;
 	}
 
 	interface Props extends Omit<HTMLAnchorAttributes, "target">, LinkProps {
@@ -28,7 +28,7 @@
 
 <a
 	class={[className?.toString(), variant, underline && "underline"]}
-	href={localizeHref(href)}
+	href={href ? localizeHref(href) : undefined}
 	target={newTab ? "_blank" : null}
 	rel={newTab ? "noopener noreferrer" : null}
 	{...restProps}>{@render children()}</a
@@ -46,6 +46,10 @@
 
 		&.underline {
 			text-decoration: underline;
+		}
+
+		&.active {
+			color: var(--primary-color);
 		}
 
 		&.button {
