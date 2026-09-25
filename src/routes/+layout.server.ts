@@ -1,9 +1,10 @@
 import { PUBLIC_POSTHOG_TOKEN } from "$env/static/public";
 import type { Theme } from "$lib/themes";
+import { isBot } from "isbot";
 import { PostHog } from "posthog-node";
 import { v7 as uuidv7 } from "uuid";
 
-export async function load({ cookies, url }) {
+export async function load({ cookies, url, request }) {
 	const theme = cookies.get("theme") as Theme | undefined;
 	const scrollWidth = Number(cookies.get("scrollWidth")) || 228;
 
@@ -17,16 +18,18 @@ export async function load({ cookies, url }) {
 		posthogId = uuid;
 	}
 
-	const client = new PostHog(PUBLIC_POSTHOG_TOKEN, {
-		host: "https://eu.i.posthog.com",
-	});
-	client.capture({
-		event: "$pageview",
-		distinctId: posthogId,
-		properties: { $current_url: url.href },
-	});
+	if (!isBot(request.headers.get("User-Agent"))) {
+		const client = new PostHog(PUBLIC_POSTHOG_TOKEN, {
+			host: "https://eu.i.posthog.com",
+		});
+		client.capture({
+			event: "$pageview",
+			distinctId: posthogId,
+			properties: { $current_url: url.href },
+		});
 
-	await client.shutdown();
+		await client.shutdown();
+	}
 
 	return { scrollWidth, currentYear, theme };
 }
