@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getCurrentYear, getTheme } from "$lib/context";
+	import { getTheme } from "$lib/context";
 	import { birthYear, siteName } from "$lib/info";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { slide } from "svelte/transition";
@@ -8,8 +8,6 @@
 	type Props = Omit<HTMLAttributes<EventTarget>, "children">;
 
 	let props: Props = $props();
-
-	const currentYear = getCurrentYear();
 
 	let showStatus = $state(false);
 	let statusTimeout: NodeJS.Timeout | null = null;
@@ -35,20 +33,16 @@
 		}
 	}}
 >
-	<p>
-		© {birthYear}
-		{siteName}
-	</p>
-
-	{#if showStatus}
-		<p class="status" transition:slide>
-			{#if currentYear() - birthYear < 100}
-				This is not my actual birth-death range ;)
-			{:else}
-				Well I may be dead... Whatever
-			{/if}
+	<div class="site-name">
+		<p>
+			© {birthYear}
+			{siteName}
 		</p>
-	{/if}
+
+		{#if showStatus}
+			<p class="status" transition:slide>Hello!</p>
+		{/if}
+	</div>
 
 	<Badge
 		src="https://notbyai.fyi/img/written-by-human-not-by-ai-white.svg"
@@ -65,9 +59,8 @@
 
 <style lang="scss">
 	footer {
-		grid-area: footer;
-		display: flex;
-		flex-direction: column;
+		display: column;
+		flex-direction: row;
 		gap: 0.25rem;
 
 		p {

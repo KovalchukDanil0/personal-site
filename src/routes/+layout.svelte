@@ -3,7 +3,7 @@
 	// Make the public chat
 
 	import { onNavigate } from "$app/navigation";
-	import { Footer, MetaTags, Navigation, Separator } from "$lib/components";
+	import { Aside, Footer, Header, MetaTags, Separator } from "$lib/components";
 	import { setCurrentYear, setTheme } from "$lib/context";
 	import { siteName } from "$lib/info";
 	import "$styles/_index.scss";
@@ -34,6 +34,10 @@
 			});
 		});
 	});
+
+	$effect(() => {
+		console.log(scrollWidth);
+	});
 </script>
 
 <svelte:window
@@ -47,37 +51,42 @@
 
 <MetaTags {title} />
 
-<div class="content" style:grid-template-columns="{scrollWidth}px 16px 1fr">
-	<Navigation />
+<div class="layout">
+	<Header />
+	<Aside width={scrollWidth} />
 
 	<Separator bind:width={scrollWidth} />
 
-	<main>
-		{@render children()}
-	</main>
+	<div class="main-wrapper">
+		<main>
+			{@render children()}
+		</main>
 
-	<Footer />
+		<Footer />
+	</div>
 </div>
 
 <style lang="scss">
-	@use "$styles/mixins" as c;
+	@use "$styles/mixins" as m;
+	@use "$styles/variables" as v;
 
-	.content {
-		height: 100%;
-		display: grid;
+	.layout {
+		display: flex;
+		flex-direction: row;
 
-		grid-template:
-			"nav    div main" auto
-			"nav    div main" 1fr
-			"footer div main" auto;
+		min-height: calc(100dvh - (2 * v.$body-padding));
 
-		@include c.screen-small {
-			grid-template:
-				"nav    nav" auto
-				"main   main" 1fr
-				"footer footer" auto
-				/ 1fr !important;
+		@include m.screen-small {
+			flex-direction: column;
 		}
+	}
+
+	.main-wrapper {
+		display: flex;
+		flex-direction: column;
+		padding: 0 10px;
+
+		flex: 1;
 	}
 
 	main {
@@ -85,10 +94,9 @@
 		flex-direction: column;
 		align-items: start;
 		gap: 0.5rem;
-		padding: 0 10px;
 		z-index: 50;
 
-		grid-area: main;
+		flex: 1 1 auto;
 	}
 
 	@keyframes fade-in {

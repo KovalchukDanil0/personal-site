@@ -1,6 +1,8 @@
+export { default as Aside } from "./Aside.svelte";
 export { default as Badge } from "./Badge.svelte";
 export { Button, ThemeSelect, type ButtonProps } from "./Button";
 export { Footer } from "./Footer";
+export { default as Header } from "./Header.svelte";
 export { default as Link, type LinkProps } from "./Link.svelte";
 export { Map } from "./Map";
 export { default as MetaTags } from "./MetaTags.svelte";

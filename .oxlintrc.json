@@ -30,7 +30,8 @@
 		"func-style": "off",
 		"import/exports-last": "off",
 		"import/no-unassigned-import": "off",
-		"import/no-anonymous-default-export": "off"
+		"import/no-anonymous-default-export": "off",
+		"max-statements": "off"
 	},
 	"env": {
 		"builtin": true

@@ -13,12 +13,18 @@
 </div>
 
 <style lang="scss">
+	@use "$styles/mixins" as m;
+
 	.toggles {
 		display: flex;
 		flex-direction: row;
 		flex-grow: 1;
-		align-items: end;
-		justify-content: end;
+		align-items: start;
+		justify-content: start;
 		gap: 0.5rem;
+
+		@include m.screen-small {
+			justify-content: center;
+		}
 	}
 </style>
