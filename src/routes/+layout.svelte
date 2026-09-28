@@ -34,10 +34,6 @@
 			});
 		});
 	});
-
-	$effect(() => {
-		console.log(scrollWidth);
-	});
 </script>
 
 <svelte:window
@@ -85,8 +81,7 @@
 		display: flex;
 		flex-direction: column;
 		padding: 0 10px;
-
-		flex: 1;
+		width: 100%;
 	}
 
 	main {

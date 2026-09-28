@@ -5,7 +5,7 @@
 
 	interactivity();
 
-	const SCALE = new Spring(1);
+	const scale = new Spring(1);
 
 	let rotation = $state(0);
 	useTask((delta) => {
@@ -26,12 +26,12 @@
 <T.Mesh
 	rotation.y={rotation}
 	position.y={1}
-	scale={SCALE.current}
+	scale={scale.current}
 	onpointerenter={() => {
-		SCALE.target = 1.5;
+		scale.target = 1.5;
 	}}
 	onpointerleave={() => {
-		SCALE.target = 1;
+		scale.target = 1;
 	}}
 	castShadow
 >

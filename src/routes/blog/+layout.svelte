@@ -2,6 +2,4 @@
 	let { children } = $props();
 </script>
 
-<div class="blog">
-	{@render children()}
-</div>
+{@render children()}

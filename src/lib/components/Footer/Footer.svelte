@@ -59,8 +59,8 @@
 
 <style lang="scss">
 	footer {
-		display: column;
-		flex-direction: row;
+		display: flex;
+		flex-direction: column;
 		gap: 0.25rem;
 
 		p {

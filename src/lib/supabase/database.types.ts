@@ -20,6 +20,7 @@ export type Database = {
           created_at: string
           description: string
           id: number
+          image_id: number | null
           slug: string
           title: string
         }
@@ -28,6 +29,7 @@ export type Database = {
           created_at?: string
           description: string
           id?: number
+          image_id?: number | null
           slug: string
           title: string
         }
@@ -36,8 +38,35 @@ export type Database = {
           created_at?: string
           description?: string
           id?: number
+          image_id?: number | null
           slug?: string
           title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blogs_image_id_fkey"
+            columns: ["image_id"]
+            isOneToOne: false
+            referencedRelation: "images"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      images: {
+        Row: {
+          alt: string
+          id: number
+          src: string
+        }
+        Insert: {
+          alt: string
+          id?: number
+          src: string
+        }
+        Update: {
+          alt?: string
+          id?: number
+          src?: string
         }
         Relationships: []
       }
