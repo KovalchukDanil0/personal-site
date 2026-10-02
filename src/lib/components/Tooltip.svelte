@@ -16,37 +16,41 @@
 	let y = $state(0);
 </script>
 
-<span
-	onmouseover={() => {
-		show = true;
-	}}
-	onmouseleave={() => {
-		show = false;
-	}}
-	onmousemove={(ev) => {
-		if (!show) {
-			return;
-		}
+<span class="tooltip">
+	<span
+		onmouseover={() => {
+			show = true;
+		}}
+		onmouseleave={() => {
+			show = false;
+		}}
+		onmousemove={(ev) => {
+			if (!show) {
+				return;
+			}
 
-		x = ev.x + padding.left;
-		y = ev.y + padding.top;
-	}}
-	{...restProps}
-	>{@render children?.()}
+			x = ev.x + padding.left;
+			y = ev.y + padding.top;
+		}}
+		{...restProps}
+		>{@render children?.()}
+	</span>
+
+	{#if show}
+		<q class="modal" style:top="{y}px" style:left="{x}px"><i>{text}</i></q>
+	{/if}
 </span>
 
-{#if show}
-	<q class="tooltip" style:top="{y}px" style:left="{x}px"><i>{text}</i></q>
-{/if}
-
 <style lang="scss">
-	span {
+	.tooltip {
+		display: inline-block;
 		text-decoration-line: underline;
 		text-decoration-style: dashed;
 		cursor: default;
 	}
 
-	.tooltip {
+	.modal {
+		display: inline;
 		border: 1px solid var(--primary-color);
 		box-shadow: 1px 1px 1px var(--primary-color);
 		background: var(--background-color);

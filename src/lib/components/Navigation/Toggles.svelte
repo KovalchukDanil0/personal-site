@@ -13,7 +13,7 @@
 </div>
 
 <style lang="scss">
-	@use "$styles/mixins" as m;
+	@use "#styles/mixins" as m;
 
 	.toggles {
 		display: flex;

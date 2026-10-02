@@ -2,7 +2,7 @@
 	import type { Snippet } from "svelte";
 	import type { HTMLButtonAttributes } from "svelte/elements";
 
-	type Variants = "theme-select";
+	type Variants = "theme-select" | "arrow-right";
 
 	export interface Props extends HTMLButtonAttributes {
 		children: Snippet;

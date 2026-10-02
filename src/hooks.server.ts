@@ -1,7 +1,6 @@
-import { paraglideMiddleware } from "$lib/paraglide/server";
-import type { Theme } from "$lib/themes";
-import type { Handle } from "@sveltejs/kit";
-import { sequence } from "@sveltejs/kit/hooks";
+import { paraglideMiddleware } from "#lib/paraglide/server.js";
+import type { Theme } from "#lib/themes.js";
+import { sequence, type Handle } from "@sveltejs/kit/hooks";
 
 const handleParaglide: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request, locale }) => {

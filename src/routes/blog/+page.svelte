@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import { Link, MetaTags, Summary } from "$lib/components";
+	import { Link, MetaTags, Summary } from "#lib/components/index.js";
 	import type { Test } from "./index";
 
 	let { data }: { data: { blogsSorted: Test } } = $props();

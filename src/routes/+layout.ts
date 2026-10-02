@@ -1,5 +1,5 @@
-import { browser } from "$app/environment";
-import { setThemeCookie } from "$lib/themes";
+import { setThemeCookie } from "#lib/themes.js";
+import { browser } from "$app/env";
 import { MediaQuery } from "svelte/reactivity";
 
 export function load({ data }) {

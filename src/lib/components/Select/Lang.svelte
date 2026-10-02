@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getLocale, locales, setLocale, type Locale } from "$lib/paraglide/runtime";
+	import { getLocale, locales, setLocale, type Locale } from "#lib/paraglide/runtime.js";
 	import { Globe } from "@lucide/svelte";
 	import { Select, type SelectProps } from ".";
 	import { Option } from "..";

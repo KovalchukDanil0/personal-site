@@ -17,8 +17,8 @@
 </aside>
 
 <style lang="scss">
-	@use "$styles/mixins" as m;
-	@use "$styles/variables" as v;
+	@use "#styles/mixins" as m;
+	@use "#styles/variables" as v;
 
 	aside {
 		position: sticky;

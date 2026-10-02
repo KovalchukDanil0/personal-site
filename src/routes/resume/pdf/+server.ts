@@ -1,4 +1,4 @@
-import { generateResumePdf } from "$lib/server/generateResumePdf";
+import { generateResumePdf } from "#lib/server/generateResumePdf.js";
 
 export function GET() {
 	const pdf = generateResumePdf();

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { normalizeUrl } from "$lib/utils";
+	import { normalizeUrl } from "#lib/utils.js";
 	import type { Snippet } from "svelte";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { type RoleDetailsProps, Section } from ".";

@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { m } from "#lib/paraglide/messages.js";
 	import { page } from "$app/state";
-	import { m } from "$lib/paraglide/messages";
 </script>
 
 <h1 class="error-code">{page.status}</h1>

@@ -1,5 +1,7 @@
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
+import adapter from "@sveltejs/adapter-cloudflare";
 import { sveltekit } from "@sveltejs/kit/vite";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import { playwright } from "@vitest/browser-playwright";
 import browserslist from "browserslist";
 import { browserslistToTargets } from "lightningcss";
@@ -10,7 +12,10 @@ const CLIENT_TESTS = ["src/**/*.svelte.test.ts"];
 
 export default defineConfig({
 	plugins: [
-		sveltekit(),
+		sveltekit({
+			adapter: adapter(),
+			preprocess: vitePreprocess(),
+		}),
 		ViteImageOptimizer(),
 		paraglideVitePlugin({
 			project: "./project.inlang",

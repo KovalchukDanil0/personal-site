@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDrag } from "$lib/dragMe";
+	import { onDrag } from "#lib/dragMe.js";
 	import { serialize } from "cookie";
 	import type { HTMLAttributes } from "svelte/elements";
 
@@ -31,7 +31,7 @@
 </div>
 
 <style lang="scss">
-	@use "$styles/mixins" as m;
+	@use "#styles/mixins" as m;
 
 	.separator-wrapper {
 		display: block;

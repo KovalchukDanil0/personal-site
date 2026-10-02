@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { Link, MetaTags, Ticker, Tooltip, WorkExperienceCard } from "#lib/components/index.js";
+	import { email, github, linkedIn } from "#lib/info.js";
 	import { resolve } from "$app/paths";
-	import { Link, MetaTags, Ticker, Tooltip, WorkExperienceCard } from "$lib/components";
-	import { email, github, linkedIn } from "$lib/info";
 </script>
 
 <MetaTags title="Hello" description="Home Page description" />
@@ -10,27 +10,28 @@
 	<h1 class="header">Hey, I am <Ticker content={["Danylo", "Dan", "Daniel", "Danil"]} /> !</h1>
 
 	<div>
-		<Tooltip text="Being a fullstack dev is being equally bad at backend and frontend"
-			>Full-Stack Web Developer</Tooltip
-		>, based in Czech Republic, Prague
+		<Tooltip text="Mostly using TypeScript, Rust and Python">Software Engineer</Tooltip>, based in
+		Czech Republic, Prague
 	</div>
 
 	<div class="buttons">
-		<Link href={resolve("/about")} variant="button">About me</Link>
-		<Link href={resolve("/blog")} variant="button">Read the blog</Link>
+		<Link href={resolve("about")} variant="arrow-right">About me</Link>
+		<Link href={resolve("blog")} variant="arrow-right">Read the blog</Link>
 	</div>
 </section>
 
 <section>
 	<h2>About Me</h2>
 	<p>
-		Full-Stack Web Developer with experience of automating complex workflows. Have passion of
-		finding different non-usual <s>workarounds</s> ways to solve a problems
+		Ut varius, velit ac gravida scelerisque, felis felis egestas purus, eget laoreet enim arcu nec
+		quam. Phasellus ornare dictum mauris vitae posuere. Suspendisse potenti. Duis pharetra massa at
+		aliquet mattis. Mauris rutrum felis lectus, et facilisis quam pulvinar vel. Duis non pretium
+		turpis. Etiam rutrum nunc ut mi lobortis lacinia. Donec ut sagittis neque.
 	</p>
 	<div class="buttons">
-		<Link href={github} variant="button" newTab>GitHub</Link>
-		<Link href={linkedIn} variant="button" newTab>LinkedIn</Link>
-		<Link href="mailto:{email}" variant="button">Email</Link>
+		<Link href={github} variant="arrow-right" newTab>GitHub</Link>
+		<Link href={linkedIn} variant="arrow-right" newTab>LinkedIn</Link>
+		<Link href="mailto:{email}" variant="arrow-right">Email</Link>
 	</div>
 </section>
 
@@ -41,13 +42,15 @@
 		period="July 2022 - Present"
 		website="vml.com/czech-republic"
 	>
-		<WorkExperienceCard.Role position="Content Editor" period="2022 - 2025"
-			>Created a Chrome Extension <Link
-				href="https://github.com/KovalchukDanil0/AEMFixes"
-				underline
-				newTab>github.com/KovalchukDanil0/AEMFixes</Link
-			> to increase productivity of team by 50% by automating repetitive work</WorkExperienceCard.Role
-		>
+		<WorkExperienceCard.Role position="Content Editor" period="2022 - 2025">
+			<p>
+				Created a Chrome Extension <Link
+					href="https://github.com/KovalchukDanil0/AEMFixes"
+					underline
+					newTab>github.com/KovalchukDanil0/AEMFixes</Link
+				> to increase productivity of team by 50% by automating repetitive work
+			</p>
+		</WorkExperienceCard.Role>
 
 		<WorkExperienceCard.Role position="Tagging Specialist" period="2026 - Present">
 			<ul>

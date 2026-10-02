@@ -13,7 +13,7 @@
 <div class="experience-card-role" {...restProps}>
 	<Section contents={[position, period]} withHeader />
 
-	<p>{@render children()}</p>
+	<div>{@render children()}</div>
 </div>
 
 <style lang="scss">

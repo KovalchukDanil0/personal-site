@@ -28,3 +28,5 @@ project.inlang/cache/
 
 bun.lock
 /supabase
+
+/src/worker-configuration.d.ts

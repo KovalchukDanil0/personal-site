@@ -2,11 +2,11 @@
 	// Make achievements system
 	// Make the public chat
 
+	import { Aside, Footer, Header, MetaTags, Separator } from "#lib/components/index.js";
+	import { setCurrentYear, setTheme } from "#lib/context.js";
+	import { siteName } from "#lib/info.js";
+	import "#styles";
 	import { onNavigate } from "$app/navigation";
-	import { Aside, Footer, Header, MetaTags, Separator } from "$lib/components";
-	import { setCurrentYear, setTheme } from "$lib/context";
-	import { siteName } from "$lib/info";
-	import "$styles/_index.scss";
 	import { onMount } from "svelte";
 
 	let { children, data } = $props();
@@ -22,9 +22,9 @@
 		initTitle = document.title.replace(new RegExp(`\\s+-\\s+${siteName}`, "u"), "");
 	});
 
-	onNavigate(({ complete }) => {
-		if (!document.startViewTransition) {
-			return;
+	onNavigate(({ complete, shallow }) => {
+		if (shallow || !document.startViewTransition) {
+			return Promise.resolve();
 		}
 
 		return new Promise((resolve) => {
@@ -63,8 +63,8 @@
 </div>
 
 <style lang="scss">
-	@use "$styles/mixins" as m;
-	@use "$styles/variables" as v;
+	@use "#styles/mixins" as m;
+	@use "#styles/variables" as v;
 
 	.layout {
 		display: flex;

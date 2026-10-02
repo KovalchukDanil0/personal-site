@@ -1,8 +1,8 @@
 <script lang="ts">
+	import { m } from "#lib/paraglide/messages.js";
+	import { localizeHref } from "#lib/paraglide/runtime.js";
 	import { resolve } from "$app/paths";
 	import { page } from "$app/state";
-	import { m } from "$lib/paraglide/messages";
-	import { localizeHref } from "$lib/paraglide/runtime";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { Link } from "..";
 
@@ -17,19 +17,19 @@
 
 	const links: LinksType[] = [
 		{ href: resolve("/"), text: m["navigation.title"]() },
-		{ href: localizeHref(resolve("/blog")), text: "Blog" },
-		{ href: localizeHref(resolve("/about")), text: "About" },
+		{ href: localizeHref(resolve("blog")), text: "Blog" },
+		{ href: localizeHref(resolve("about")), text: "About" },
 	];
 </script>
 
 <nav {...props}>
 	{#each links as { href, text }}
-		<Link {href} variant={href === page.url.pathname && "active"}>{text}</Link>
+		<Link {href} aria-current={href === page.url.pathname ? "page" : undefined}>{text}</Link>
 	{/each}
 </nav>
 
 <style lang="scss">
-	@use "$styles/mixins" as m;
+	@use "#styles/mixins" as m;
 
 	nav {
 		height: 100%;

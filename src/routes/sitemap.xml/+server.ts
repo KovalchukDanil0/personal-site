@@ -1,4 +1,4 @@
-import { supabase } from "$lib/supabase/client.js";
+import { supabase } from "#lib/supabase/client.js";
 import { response } from "super-sitemap/sveltekit";
 
 export const prerender = true;

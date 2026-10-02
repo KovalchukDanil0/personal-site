@@ -1,7 +1,6 @@
 {
-	"extends": "./.svelte-kit/tsconfig.json",
+	"extends": "$app/tsconfig",
 	"compilerOptions": {
-		"strict": true,
 		"allowUnusedLabels": false,
 		"allowUnreachableCode": false,
 		"noFallthroughCasesInSwitch": true,
@@ -15,10 +14,5 @@
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 	},
-
-	// Path aliases are handled by https://svelte.dev/docs/kit/configuration#alias
-	// except $lib which is handled by https://svelte.dev/docs/kit/configuration#files
-	//
-	// To make changes to top-level options such as include and exclude, we recommend extending
-	// the generated config; see https://svelte.dev/docs/kit/configuration#typescript
+	"include": ["src", "vite.config.ts"],
 }

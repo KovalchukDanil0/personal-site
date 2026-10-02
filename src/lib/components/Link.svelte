@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { localizeHref } from "$lib/paraglide/runtime";
+	import { localizeHref } from "#lib/paraglide/runtime.js";
+	import { ArrowRight } from "@lucide/svelte";
 	import type { Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
-	type Variants = "button" | "nav" | "active";
+	type Variants = "button" | "arrow-right";
 
 	export interface LinkProps {
 		newTab?: boolean;
@@ -31,24 +32,53 @@
 	href={href ? localizeHref(href) : undefined}
 	target={newTab ? "_blank" : null}
 	rel={newTab ? "noopener noreferrer" : null}
-	{...restProps}>{@render children()}</a
->
+	{...restProps}
+	>{@render children()}
+	{#if variant}
+		<div class="icon">
+			{#if variant === "arrow-right"}
+				<ArrowRight />
+			{/if}
+		</div>
+	{/if}
+</a>
 
 <style lang="scss">
+	$translate-x: 10px;
+
+	.icon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-right: $translate-x;
+
+		transition:
+			transform 0.3s ease,
+			box-shadow 0.3s ease;
+	}
+
 	a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.2rem;
 		cursor: pointer;
 		text-decoration: none;
 		width: fit-content;
 
 		&:hover {
 			color: gray;
+
+			.icon {
+				transform: translateX($translate-x);
+			}
 		}
 
 		&.underline {
 			text-decoration: underline;
 		}
 
-		&.active {
+		&[aria-current="page"] {
 			color: var(--primary-color);
 		}
 

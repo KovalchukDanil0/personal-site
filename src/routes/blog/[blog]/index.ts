@@ -1,4 +1,4 @@
-import type { Tables } from "$lib/supabase/database.types";
+import type { Tables } from "#lib/supabase/database.types.js";
 
 export type BlogImage = Partial<Omit<Tables<"images">, "id">>;
 

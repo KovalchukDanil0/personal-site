@@ -1,4 +1,4 @@
-import { supabase } from "$lib/supabase";
+import { supabase } from "#lib/supabase/index.js";
 import { error } from "@sveltejs/kit";
 import { marked, type Renderer } from "marked";
 import sanitizeHtml from "sanitize-html";

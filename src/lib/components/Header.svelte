@@ -12,8 +12,8 @@
 </header>
 
 <style lang="scss">
-	@use "$styles/mixins" as m;
-	@use "$styles/variables" as v;
+	@use "#styles/mixins" as m;
+	@use "#styles/variables" as v;
 
 	header {
 		position: sticky;

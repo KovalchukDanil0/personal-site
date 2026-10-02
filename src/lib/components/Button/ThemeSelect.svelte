@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { getTheme } from "$lib/context";
-	import { setThemeCookie, type Theme } from "$lib/themes";
+	import { getTheme } from "#lib/context.js";
+	import { setThemeCookie, type Theme } from "#lib/themes.js";
 	import { Moon, Sun } from "@lucide/svelte";
 	import type { HTMLButtonAttributes } from "svelte/elements";
 	import { Button } from "..";

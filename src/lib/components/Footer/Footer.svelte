@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { getTheme } from "$lib/context";
-	import { birthYear, siteName } from "$lib/info";
+	import { getTheme } from "#lib/context.js";
+	import { birthYear, siteName } from "#lib/info.js";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { slide } from "svelte/transition";
 	import { Badge } from "..";
@@ -44,17 +44,19 @@
 		{/if}
 	</div>
 
-	<Badge
-		src="https://notbyai.fyi/img/written-by-human-not-by-ai-white.svg"
-		href="https://notbyai.fyi"
-		alt="Written by humans, not by AI"
-	/>
+	<div class="badges-wrapper">
+		<Badge
+			src="https://notbyai.fyi/img/written-by-human-not-by-ai-white.svg"
+			href="https://notbyai.fyi"
+			alt="Written by humans, not by AI"
+		/>
 
-	<Badge
-		src="https://storage.ko-fi.com/cdn/kofi{themeDark ? '1' : '6'}.png?v=1"
-		href="https://ko-fi.com/T8M627428N"
-		alt="Buy me a coffee"
-	/>
+		<Badge
+			src="https://storage.ko-fi.com/cdn/kofi{themeDark ? '1' : '6'}.png?v=1"
+			href="https://ko-fi.com/T8M627428N"
+			alt="Buy me a coffee"
+		/>
+	</div>
 </footer>
 
 <style lang="scss">
@@ -66,9 +68,15 @@
 		p {
 			margin: 0;
 		}
+	}
 
-		.status {
-			font-size: 0.7rem;
-		}
+	.status {
+		font-size: 0.7rem;
+	}
+
+	.badges-wrapper {
+		display: flex;
+		flex-direction: row;
+		gap: 0.25rem;
 	}
 </style>

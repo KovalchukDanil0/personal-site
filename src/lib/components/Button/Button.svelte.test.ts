@@ -1,15 +1,17 @@
-import { simpleComponent } from "$lib/utils.svelte";
+import { createRawSnippet } from "svelte";
 import { describe, expect, it } from "vitest";
 import { render } from "vitest-browser-svelte";
 import { page } from "vitest/browser";
 import { Button } from ".";
 
-const TEXT_TO_CHECK = "Hello World!";
+const textToCheck = "Hello World!";
 
 describe("Welcome.svelte", () => {
 	it("renders greetings for host and guest", async () => {
-		render(Button, { children: simpleComponent(TEXT_TO_CHECK) });
+		render(Button, {
+			children: createRawSnippet(() => ({ render: () => "test" })),
+		});
 
-		await expect.element(page.getByText(TEXT_TO_CHECK)).toBeInTheDocument();
+		await expect.element(page.getByText(textToCheck)).toBeInTheDocument();
 	});
 });

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { siteName } from "$lib/info";
+	import { siteName } from "#lib/info.js";
 	import { MetaTags, type MetaTagsProps } from "svelte-meta-tags";
 
 	interface Props extends Omit<MetaTagsProps, "titleTemplate"> {

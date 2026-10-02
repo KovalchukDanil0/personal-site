@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import { Link, MetaTags } from "$lib/components";
+	import { Link, MetaTags } from "#lib/components/index.js";
 	import type { Blog } from ".";
 
 	interface Props {
@@ -58,8 +58,7 @@
 />
 
 <MetaTags {title} {description} />
-
-<Link href={resolve("/blog")}>Back</Link>
+<Link href={resolve("blog")}>Back</Link>
 
 <article>
 	{#if image}

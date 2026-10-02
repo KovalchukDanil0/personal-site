@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { asset, resolve } from "$app/paths";
-	import { MetaTags } from "$lib/components";
+	import { MetaTags } from "#lib/components/index.js";
 </script>
 
 <MetaTags title="Resume of" description="Resume" />
 
 <h1>Resume goes here</h1>
 
-<embed src={asset("/resume.pdf")} type="application/pdf" />
+<embed src={asset("resume.pdf")} type="application/pdf" />
 
 <iframe
 	title="Resume"
-	src={resolve("/resume/pdf")}
+	src={resolve("resume/pdf")}
 	width="100%"
 	height="800"
 	style="border:1px solid #ccc"
