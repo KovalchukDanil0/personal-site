@@ -1,30 +1,8 @@
+import { supabase } from "#lib/supabase/client.js";
 import XMLBuilder from "fast-xml-builder";
-import { postsGlob } from "..";
 
-export function GET({ url: { origin: site } }) {
-	const items = Object.entries(postsGlob)
-		.map(
-			([
-				path,
-				{
-					metadata: { title, date, description },
-				},
-			]) => {
-				const slug = path.split("/").pop()?.replace(".md", "");
-				if (!slug) {
-					return null;
-				}
-
-				return {
-					title,
-					description,
-					date,
-					slug,
-				};
-			}
-		)
-		.filter((item) => !!item)
-		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+export async function GET({ url: { origin: site } }) {
+	const { data: blogs } = await supabase.from("blogs").select();
 
 	const builder = new XMLBuilder({
 		ignoreAttributes: false,
@@ -45,10 +23,10 @@ export function GET({ url: { origin: site } }) {
 				link: site,
 				description: "Latest blog posts",
 
-				item: items.map(({ date, description, slug, title }) => ({
+				item: blogs?.map(({ created_at, description, slug, title }) => ({
 					link: `${site}/blog/${slug}`,
 					guid: `${site}/blog/${slug}`,
-					pubDate: new Date(date).toUTCString(),
+					pubDate: new Date(created_at).toUTCString(),
 					description,
 					title,
 				})),
