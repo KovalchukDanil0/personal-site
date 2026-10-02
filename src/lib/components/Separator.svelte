@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDrag } from "#lib/dragMe.js";
-	import { serialize } from "cookie";
+	import { stringifySetCookie } from "cookie";
 	import type { HTMLAttributes } from "svelte/elements";
 
 	interface Props extends HTMLAttributes<EventTarget> {
@@ -22,7 +22,9 @@
 			},
 			onDragEnd: () => {
 				initialWidth = width;
-				document.cookie = serialize("scrollWidth", initialWidth.toString(), {
+				document.cookie = stringifySetCookie({
+					name: "scrollWidth",
+					value: initialWidth.toString(),
 					path: "/",
 				});
 			},
