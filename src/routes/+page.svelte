@@ -1,12 +1,17 @@
 <script lang="ts">
 	import { Link, MetaTags, Skills, Ticker, WorkExperience } from "#components";
 	import { email, github, linkedIn } from "#lib/info.ts";
+
+	let { data } = $props();
+	let { isBot } = $derived(data);
 </script>
 
 <MetaTags title="Hello" description="Home Page description" />
 
 <section>
-	<h1 class="header">Hey, I am <Ticker content={["Danylo", "Dan", "Daniel", "Danil"]} /> !</h1>
+	<h1 class="header">
+		Hey, I am <Ticker content={["Danylo", "Dan", "Daniel", "Danil"]} {isBot} /> !
+	</h1>
 
 	<p class="details">Software Engineer, based in Czech Republic, Prague</p>
 	<p><i>I like building things that are a little different and making them run fast</i></p>

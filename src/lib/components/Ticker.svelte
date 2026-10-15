@@ -5,9 +5,10 @@
 	interface Props {
 		content: string[];
 		interval?: number;
+		isBot?: boolean;
 	}
 
-	let { interval = 2000, content }: Props = $props();
+	let { interval = 2000, isBot, content }: Props = $props();
 
 	let currentIndex = $state(0);
 
@@ -15,9 +16,11 @@
 	let currentWidth = $state<number>(108);
 
 	onMount(() => {
-		setInterval(() => {
-			currentIndex = (currentIndex + 1) % content.length;
-		}, interval);
+		if (!isBot) {
+			setInterval(() => {
+				currentIndex = (currentIndex + 1) % content.length;
+			}, interval);
+		}
 	});
 
 	$effect(() => {
