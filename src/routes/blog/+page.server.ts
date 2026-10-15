@@ -1,5 +1,5 @@
-import { supabase } from "#lib/supabase/index.js";
 import type { Tables } from "#lib/supabase/database.types.js";
+import { supabase } from "#lib/supabase/index.js";
 import { error } from "@sveltejs/kit";
 import type { Test } from ".";
 

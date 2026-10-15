@@ -31,7 +31,8 @@
 		"import/exports-last": "off",
 		"import/no-unassigned-import": "off",
 		"import/no-anonymous-default-export": "off",
-		"max-statements": "off"
+		"max-statements": "off",
+		"import/namespace": "off"
 	},
 	"env": {
 		"builtin": true

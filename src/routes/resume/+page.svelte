@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { MetaTags } from "#components";
 	import { asset, resolve } from "$app/paths";
-	import { MetaTags } from "#lib/components/index.js";
 </script>
 
 <MetaTags title="Resume of" description="Resume" />

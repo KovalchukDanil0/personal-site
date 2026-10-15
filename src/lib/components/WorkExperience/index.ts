@@ -1,14 +1,13 @@
-import Info from "./Info.svelte";
+import Card from "./Card.svelte";
 import Role from "./Role.svelte";
 
 export interface RoleDetailsProps {
 	position?: string;
+	link?: string;
 	period: string;
 }
 
-export { default as Section } from "./Section.svelte";
-
 export default {
 	Role,
-	Info,
+	Card,
 };

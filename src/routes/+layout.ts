@@ -1,4 +1,4 @@
-import { setThemeCookie } from "#lib/themes.js";
+import { setThemeCookie } from "#lib/themes.ts";
 import { browser } from "$app/env";
 import { MediaQuery } from "svelte/reactivity";
 

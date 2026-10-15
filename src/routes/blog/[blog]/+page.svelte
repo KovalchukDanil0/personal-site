@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { Link, MetaTags } from "#components";
 	import { resolve } from "$app/paths";
-	import { Link, MetaTags } from "#lib/components/index.js";
 	import type { Blog } from ".";
 
 	interface Props {

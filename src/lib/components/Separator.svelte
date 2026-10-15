@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDrag } from "#lib/dragMe.js";
+	import { onDrag } from "#lib/dragMe.ts";
 	import { stringifySetCookie } from "cookie";
 	import type { HTMLAttributes } from "svelte/elements";
 

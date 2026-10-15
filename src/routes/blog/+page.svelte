@@ -1,9 +1,8 @@
 <script lang="ts">
+	import { Link, MetaTags, Summary } from "#components";
 	import { resolve } from "$app/paths";
-	import { Link, MetaTags, Summary } from "#lib/components/index.js";
-	import type { Test } from "./index";
 
-	let { data }: { data: { blogsSorted: Test } } = $props();
+	let { data } = $props();
 	let { blogsSorted } = $derived(data);
 </script>
 

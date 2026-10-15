@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { getTheme } from "#lib/context.js";
-	import { birthYear, siteName } from "#lib/info.js";
+	import { getTheme } from "#lib/context.ts";
+	import { birthYear, siteName } from "#lib/info.ts";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { slide } from "svelte/transition";
-	import { Badge } from "..";
+	import { Badge } from ".";
 
 	type Props = Omit<HTMLAttributes<EventTarget>, "children">;
 

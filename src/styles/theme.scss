@@ -2,26 +2,32 @@
 
 :root {
 	--primary-color: #{v.$primary-color-light};
-	--secondary-color: #{v.$secondary-color-light};
+	--secondary-color: #{v.$tertiary-color-light};
+	--tertiary-color: #{v.$secondary-color-light};
+
+	--text-color: #{v.$text-color-dark};
+	--text-color-inverted: #{v.$text-color-light};
 
 	--background-color: #{v.$background-color-light};
 	--button-text-color: #{v.$text-color-dark};
 	--button-background-color: #{v.$background-color-light};
-	--text-color: #{v.$text-color-dark};
 
-	--leaflet-background-color: white;
+	--leaflet-background-color: v.$background-color-light;
 	--leaflet-filter: none;
 
 	&[data-theme="dark"] {
 		--primary-color: #{v.$primary-color-dark};
-		--secondary-color: #{v.$secondary-color-dark};
+		--secondary-color: #{v.$tertiary-color-dark};
+		--tertiary-color: #{v.$secondary-color-dark};
+
+		--text-color: #{v.$text-color-light};
+		--text-color-inverted: #{v.$text-color-dark};
 
 		--background-color: #{v.$background-color-dark};
 		--button-text-color: #{v.$text-color-light};
 		--button-background-color: #{v.$background-color-dark};
-		--text-color: #{v.$text-color-light};
 
-		--leaflet-background-color: black;
+		--leaflet-background-color: v.$background-color-dark;
 		--leaflet-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3)
 			brightness(0.7);
 	}

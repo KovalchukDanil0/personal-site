@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MetaTags } from "#lib/components/index.js";
+	import { MetaTags } from "#components";
 </script>
 
 <MetaTags title="About Me" />

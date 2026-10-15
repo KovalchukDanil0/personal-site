@@ -67,19 +67,23 @@
 		width: fit-content;
 
 		&:hover {
-			color: gray;
+			color: var(--tertiary-color);
 
 			.icon {
 				transform: translateX($translate-x);
 			}
 		}
 
-		&.underline {
-			text-decoration: underline;
-		}
-
 		&[aria-current="page"] {
 			color: var(--primary-color);
+
+			&:hover {
+				color: var(--tertiary-color);
+			}
+		}
+
+		&.underline {
+			text-decoration: underline;
 		}
 
 		&.button {

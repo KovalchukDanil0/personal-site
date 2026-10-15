@@ -2,9 +2,9 @@
 	// Make achievements system
 	// Make the public chat
 
-	import { Aside, Footer, Header, MetaTags, Separator } from "#lib/components/index.js";
-	import { setCurrentYear, setTheme } from "#lib/context.js";
-	import { siteName } from "#lib/info.js";
+	import { Aside, Footer, Header, MetaTags, Separator } from "#components";
+	import { setCurrentYear, setTheme } from "#lib/context.ts";
+	import { siteName } from "#lib/info.ts";
 	import "#styles";
 	import { onNavigate } from "$app/navigation";
 	import { onMount } from "svelte";
@@ -80,7 +80,7 @@
 	.main-wrapper {
 		display: flex;
 		flex-direction: column;
-		padding: 0 10px;
+		padding: 0 20px;
 		width: 100%;
 	}
 

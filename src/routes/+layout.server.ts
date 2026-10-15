@@ -1,4 +1,4 @@
-import type { Theme } from "#lib/themes.js";
+import type { Theme } from "#lib/themes.ts";
 
 export function load({ cookies }) {
 	const theme = cookies.get("theme") as Theme | undefined;

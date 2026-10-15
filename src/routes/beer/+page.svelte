@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Map } from "#lib/components/index.js";
+	import { Map } from "#components";
 </script>
 
 <Map />
