@@ -6,14 +6,12 @@ export async function GET({ url: { origin } }) {
 			{
 				userAgent: "*",
 				allow: "/",
-				disallow: "/test/*",
+				disallow: "/test",
 			},
 		],
 		sitemap: `${origin}/sitemap.xml`,
 		host: origin,
 	});
-
-	console.log(robots);
 
 	return new Response(robots);
 }

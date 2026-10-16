@@ -3,15 +3,16 @@
 	// Make the public chat
 
 	import { Aside, Footer, Header, Separator } from "#components";
-	import { setCurrentYear, setTheme } from "#lib/context.ts";
+	import { setCurrentYear, setIsBot, setTheme } from "#lib/context.ts";
 	import "#styles";
 	import { onNavigate } from "$app/navigation";
 
 	let { children, data } = $props();
-	let { currentYear, theme, scrollWidth } = $derived(data);
+	let { currentYear, theme, isBot, scrollWidth } = $derived(data);
 
 	setCurrentYear(() => currentYear);
 	setTheme(() => theme);
+	setIsBot(() => isBot);
 
 	onNavigate(({ complete, shallow }) => {
 		if (shallow || !document.startViewTransition) {

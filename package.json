@@ -19,7 +19,7 @@
 		"supabase:gen-types": "npx supabase gen types typescript --project-id 'agwsjfktovregdpcobbf' --schema public > src/lib/supabase/database.types.ts"
 	},
 	"dependencies": {
-		"@lucide/svelte": "^1.57.0",
+		"@lucide/svelte": "^1.58.0",
 		"@supabase/supabase-js": "^2.118.0",
 		"generate-robotstxt": "^8.0.3",
 		"isbot": "^5.2.2",
@@ -38,7 +38,7 @@
 		"@sveltejs/kit": "^3.1.0",
 		"@sveltejs/vite-plugin-svelte": "^7.3.1",
 		"@threlte/core": "^8.6.1",
-		"@threlte/extras": "^9.22.1",
+		"@threlte/extras": "^9.22.2",
 		"@types/node": "^26.6.5",
 		"@types/sanitize-html": "^2.16.2",
 		"@vitest/browser-playwright": "^5.0.5",
@@ -54,10 +54,10 @@
 		"prettier": "^3.9.10",
 		"prettier-plugin-svelte": "^4.1.1",
 		"prism-themes": "^1.9.0",
-		"sass-embedded": "^1.105.1",
+		"sass-embedded": "^1.105.2",
 		"sveaflet": "^0.1.5",
 		"svelte": "^5.57.2",
-		"svelte-check": "^4.7.6",
+		"svelte-check": "^4.7.7",
 		"svelte-meta-tags": "^5.0.3",
 		"svelte-motion": "^0.12.2",
 		"svelte-pixi": "^8.0.1",
@@ -67,7 +67,7 @@
 		"vite-plugin-image-optimizer": "^2.0.3",
 		"vitest": "^5.0.5",
 		"vitest-browser-svelte": "^3.1.0",
-		"wrangler": "^4.151.0"
+		"wrangler": "^4.151.1"
 	},
 	"trustedDependencies": [
 		"@parcel/watcher",

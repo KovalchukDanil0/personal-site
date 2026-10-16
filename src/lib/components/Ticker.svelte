@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getIsBot } from "#lib/context.ts";
 	import { onMount } from "svelte";
 	import { fly } from "svelte/transition";
 
@@ -8,7 +9,9 @@
 		isBot?: boolean;
 	}
 
-	let { interval = 2000, isBot, content }: Props = $props();
+	let { interval = 2000, content }: Props = $props();
+
+	const isBot = getIsBot();
 
 	let currentIndex = $state(0);
 
@@ -16,7 +19,7 @@
 	let currentWidth = $state<number>(108);
 
 	onMount(() => {
-		if (!isBot) {
+		if (!isBot()) {
 			setInterval(() => {
 				currentIndex = (currentIndex + 1) % content.length;
 			}, interval);
