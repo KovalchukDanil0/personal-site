@@ -6,7 +6,7 @@
 	let { isBot } = $derived(data);
 </script>
 
-<MetaTags title="Hello" description="Home Page description" />
+<MetaTags description="Home Page description" />
 
 <section>
 	<h1 class="header">

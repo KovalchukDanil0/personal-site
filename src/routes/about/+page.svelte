@@ -2,6 +2,6 @@
 	import { MetaTags } from "#components";
 </script>
 
-<MetaTags title="About Me" />
+<MetaTags title="About" />
 
 <h1>About</h1>

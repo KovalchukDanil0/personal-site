@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { getTheme } from "#lib/context.ts";
-	import { birthYear, siteName } from "#lib/info.ts";
+	import { getCurrentYear, getTheme } from "#lib/context.ts";
+	import { myName } from "#lib/info.ts";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { slide } from "svelte/transition";
 	import { Badge } from ".";
@@ -14,6 +14,8 @@
 
 	let theme = getTheme();
 	let themeDark = theme() === "dark";
+
+	let currentYear = getCurrentYear();
 </script>
 
 <footer
@@ -35,8 +37,8 @@
 >
 	<div class="site-name">
 		<p>
-			© {birthYear}
-			{siteName}
+			© {currentYear()}
+			{myName}
 		</p>
 
 		{#if showStatus}

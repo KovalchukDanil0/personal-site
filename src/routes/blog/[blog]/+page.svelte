@@ -58,6 +58,7 @@
 />
 
 <MetaTags {title} {description} />
+
 <Link href={resolve("blog")}>Back</Link>
 
 <article>

@@ -2,25 +2,16 @@
 	// Make achievements system
 	// Make the public chat
 
-	import { Aside, Footer, Header, MetaTags, Separator } from "#components";
+	import { Aside, Footer, Header, Separator } from "#components";
 	import { setCurrentYear, setTheme } from "#lib/context.ts";
-	import { siteName } from "#lib/info.ts";
 	import "#styles";
 	import { onNavigate } from "$app/navigation";
-	import { onMount } from "svelte";
 
 	let { children, data } = $props();
 	let { currentYear, theme, scrollWidth } = $derived(data);
 
 	setCurrentYear(() => currentYear);
 	setTheme(() => theme);
-
-	let initTitle = $state<string>();
-	let title = $state<string>();
-
-	onMount(() => {
-		initTitle = document.title.replace(new RegExp(`\\s+-\\s+${siteName}`, "u"), "");
-	});
 
 	onNavigate(({ complete, shallow }) => {
 		if (shallow || !document.startViewTransition) {
@@ -35,17 +26,6 @@
 		});
 	});
 </script>
-
-<svelte:window
-	onblur={() => {
-		title = "Come back again";
-	}}
-	onfocus={() => {
-		title = initTitle;
-	}}
-/>
-
-<MetaTags {title} />
 
 <div class="layout">
 	<Header />

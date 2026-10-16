@@ -6,7 +6,7 @@
 	let { blogsSorted } = $derived(data);
 </script>
 
-<MetaTags title="Blog overview" description="Blog overview description" />
+<MetaTags title="Blogs" description="Blog overview description" />
 
 <div class="posts-overview">
 	{#each Object.entries(blogsSorted) as [year, blogs]}

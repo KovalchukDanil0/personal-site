@@ -21,6 +21,7 @@
 	"dependencies": {
 		"@lucide/svelte": "^1.57.0",
 		"@supabase/supabase-js": "^2.118.0",
+		"generate-robotstxt": "^8.0.3",
 		"isbot": "^5.2.2",
 		"jspdf": "^4.2.1",
 		"sanitize-html": "^2.18.1",

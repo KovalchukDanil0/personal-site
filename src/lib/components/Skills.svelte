@@ -7,9 +7,9 @@
 </script>
 
 <div {...props} class="skills">
-	<p>JavaScript</p>
-	<p>TypeScript</p>
+	<p>JavaScript/TypeScript</p>
 	<p>Rust</p>
+	<p>Python</p>
 </div>
 
 <style lang="scss">
